@@ -1,0 +1,49 @@
+Configuração: {
+  label: "Configuração\n(cadastro de lembretes)"
+  shape: rectangle
+}
+
+Persistência: {
+  label: "Persistência\n(arquivo / SQLite)"
+  shape: rectangle
+}
+
+Agendamento: {
+  label: "Agendamento\n(motor de recorrência)"
+  shape: rectangle
+}
+
+Bandeja: {
+  label: "Bandeja do sistema\n(ícone + menu)"
+  shape: rectangle
+}
+
+Ações: {
+  label: "Ações\nnotificação / som / pop-up / abrir app"
+  shape: rectangle
+}
+
+Configuração -> Persistência: "cadastra"
+Persistência -> Agendamento: "lê lembretes"
+Agendamento -> Bandeja: "dispara evento"
+Bandeja -> Ações: "aciona"
+
+RF10 (opcional): {
+  label: "GUI PySide6\n(alternativa à config. por arquivo)"
+  shape: rectangle
+  style.stroke-dash: 3
+}
+
+RF10 (opcional) -> Configuração: "opcional" {
+  style.stroke-dash: 3
+}
+
+RF09 (opcional): {
+  label: "Execução de comando\nlivre"
+  shape: rectangle
+  style.stroke-dash: 3
+}
+
+Ações -> RF09 (opcional): "opcional" {
+  style.stroke-dash: 3
+}
