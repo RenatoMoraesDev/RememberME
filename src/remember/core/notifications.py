@@ -1,0 +1,1 @@
+# Abstração de notificações (ex: plyer)

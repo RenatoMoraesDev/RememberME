@@ -1,0 +1,1 @@
+# Centraliza o Typer, Tray, Scheduler e Storage

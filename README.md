@@ -31,6 +31,7 @@ Em avaliação, decisão formal prevista para a Etapa 2 (Arquitetura, Tecnologia
 - **Agendamento/recorrência:** schedule ou APScheduler
 - **Empacotamento:** PyInstaller
 - **GUI (RF10, incremental):** PySide6
+- **CLI:** Typer
 
 ## Contribuidores
 
