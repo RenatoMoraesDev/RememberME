@@ -35,8 +35,8 @@ Em avaliação, decisão formal prevista para a Etapa 2 (Arquitetura, Tecnologia
 
 ## Contribuidores
 
-| Nome | GitHub |
-|---|---|
-| Felipe Ribeiro | [@felipe-g-ribeiro](https://github.com/felipe-g-ribeiro) |
-| Niley Barros | [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) |
-| Renato Moraes | [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) |
+| Nome | GitHub | Papéis |
+|---|---|---|
+| Felipe Ribeiro | [@felipe-g-ribeiro](https://github.com/felipe-g-ribeiro) | desenvolvimento de backend|
+| Niley Barros | [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) | desenvolvimento de backend|
+| Renato Moraes | [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) | coordenação, integração e documentação|
