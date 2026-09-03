@@ -1,0 +1,51 @@
+# --- Python -----------------------------------------------------------
+__pycache__/
+*.py[cod]
+# *.egg-info aparece assim que alguem correr `pip install -e .` (Fase 1)
+*.egg-info/
+.eggs/
+
+# --- Ambientes virtuais -----------------------------------------------
+.venv/
+venv/
+env/
+
+# --- Base de dados ----------------------------------------------------
+# A base fica na pasta de dados do utilizador (decisao D2), mas durante o
+# desenvolvimento e' facil apontar para a pasta do projeto sem querer.
+*.db
+*.sqlite3
+# O SQLite cria estes tres durante as escritas
+*.db-journal
+*.db-wal
+*.db-shm
+
+# --- Empacotamento ----------------------------------------------------
+dist/
+build/
+# ATENCAO ao *.spec: enquanto for gerado pelo PyInstaller, e' descartavel.
+# Assim que for editado a mao - por exemplo para o --hidden-import do plyer,
+# risco R11 - passa a ser codigo-fonte e TEM de ser versionado. Nessa altura,
+# apagar a linha abaixo e commitar o ficheiro.
+*.spec
+
+# --- Testes e ferramentas ---------------------------------------------
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- Editores ---------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+
+# --- Windows ----------------------------------------------------------
+Thumbs.db
+desktop.ini
+
+# --- Outros -----------------------------------------------------------
+*.log
+.env
+.claude/
