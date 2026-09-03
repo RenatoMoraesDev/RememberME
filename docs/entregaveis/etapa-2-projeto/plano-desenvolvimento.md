@@ -31,33 +31,33 @@ O layout `src/` já adotado é o padrão da comunidade Python: impede que o inte
 
 ```
 RememberME/
-├── .gitignore              (a criar)  venv, __pycache__, dist/, build/, *.db
-├── pyproject.toml          (a criar)  metadados + dependências com versão fixa
+├── .gitignore              venv, __pycache__, dist/, build/, *.db
+├── pyproject.toml          metadados + dependências mínimas
+├── uv.lock                 versões exatas — vai para o repositório
 ├── README.md, LICENSE, logo.png
 │
 ├── docs/
-│   ├── tasks.md                       quadro de tarefas (documento vivo)
-│   ├── decisoes.md                    registo de decisões técnicas (documento vivo)
-│   └── entregaveis/                   material de avaliação, uma pasta por etapa
+│   ├── tasks.md            quadro de tarefas (documento vivo)
+│   ├── decisoes.md         registo de decisões (documento vivo)
+│   └── entregaveis/        material de avaliação, uma pasta por etapa
 │
 ├── src/rememberme/
-│   ├── __init__.py                    marca a pasta como pacote Python
-│   ├── __main__.py         (a criar)  o que o `python -m rememberme` executa
-│   ├── remember.py                    ponto de entrada, chamado pelo __main__.py
-│   ├── main.py                        composição: liga CLI, Tray, Scheduler, Storage
-│   ├── models.py           (a criar)  dataclass Reminder — contrato entre módulos
-│   └── core/
-│       ├── __init__.py     (a criar)  ausente hoje
-│       ├── storage.py                 pasta da app + SQLite (CRUD)
-│       ├── scheduler.py               motor de agendamento
-│       ├── notifications.py           abstração de notificação
-│       ├── actions.py      (a criar)  som, abrir URL/app, comando (RF07/RF09)
-│       ├── tray.py                    ícone de bandeja + menu
-│       ├── instancia.py    (a criar)  instância única e pedido de paragem
-│       └── cli.py          (a criar)  comandos Typer
+│   ├── __init__.py         marca a pasta como pacote Python
+│   ├── __main__.py         o que o `python -m rememberme` executa
+│   ├── cli.py              comandos Typer                    Felipe
+│   ├── app.py              liga as peças umas às outras       Renato
+│   ├── models.py           dataclass Reminder — o contrato    Renato
+│   ├── storage.py          SQLite                             Renato
+│   ├── scheduler.py        APScheduler                        Renato
+│   ├── notifications.py    plyer                              Niley
+│   └── tray.py             ícone de bandeja + menu             Renato
 │
-└── tests/                  (a criar)  insumo da Etapa 4
+└── tests/                  insumo da Etapa 4
 ```
+
+Sete módulos, sem subpastas. Uma pasta `core/` a agrupar seis ficheiros não
+organiza nada que a lista acima já não mostre, e custa imports mais longos a
+quem está a aprender a linguagem.
 
 ### 2.1 Divisão em camadas
 
@@ -66,12 +66,13 @@ O enunciado pede a divisão entre frontend, backend e dados. Numa aplicação de
 | Camada | Módulos |
 |---|---|
 | Interface | `cli.py`, `tray.py`, e a GUI PySide6 se o RF10 avançar |
-| Lógica | `scheduler.py`, `notifications.py`, `actions.py`, `instancia.py`, `main.py` |
+| Lógica | `scheduler.py`, `notifications.py`, `app.py` |
 | Dados | `storage.py`, `models.py` |
 
 ### 2.2 Ficheiros de configuração
 
-- **`pyproject.toml`** — dependências com versão fixada, para que os três instalem exatamente o mesmo.
+- **`pyproject.toml`** — declara as dependências e a versão mínima de cada uma.
+- **`uv.lock`** — regista a versão **exata** de todas elas, incluindo as que vieram por arrasto, e vai para o repositório. É o que garante que os três correm rigorosamente o mesmo: `uv sync` reproduz o ambiente a partir daqui.
 - **`.gitignore`** — sem ele, a primeira `venv` ou `__pycache__` que alguém commitar gera conflito em todas as branches em aberto. É o primeiro ficheiro a criar, antes de qualquer código.
 - **Base de dados** — não vai para o repositório. Fica na pasta de dados do utilizador, resolvida por `typer.get_app_dir("RememberME")`, que devolve o caminho correto em Windows, macOS e Linux sem código condicional.
 
@@ -79,28 +80,31 @@ O enunciado pede a divisão entre frontend, backend e dados. Numa aplicação de
 
 ## 3. Modelo de dados
 
-Um único registo, `reminder`, sustenta RF01 a RF07:
+Um único registo, `lembrete`, sustenta o RF01 e o RF02:
 
 | Campo | Tipo | Notas |
 |---|---|---|
 | `id` | INTEGER PK | |
-| `titulo` | TEXT | texto do lembrete |
-| `mensagem` | TEXT | corpo da notificação |
-| `tipo` | TEXT | `fixo` \| `recorrente` |
-| `hora` | TEXT | `HH:MM`, quando `tipo = fixo` (RF01) |
-| `intervalo_min` | INTEGER | quando `tipo = recorrente` (RF02) |
-| `janela_inicio` | TEXT | `HH:MM` — limite inferior (RF02) |
-| `janela_fim` | TEXT | `HH:MM` — limite superior (RF02) |
-| `dias_semana` | TEXT | ex.: `1,2,3,4,5` |
-| `accao` | TEXT | `notificacao` \| `som` \| `popup` \| `abrir` (RF07) |
-| `accao_param` | TEXT | URL, caminho ou comando, conforme a ação |
-| `ultima_execucao` | TEXT | data e hora do último disparo |
-| `activo` | INTEGER | 0/1 |
+| `texto` | TEXT | o que a notificação diz |
+| `hora` | TEXT | `HH:MM` — **se estiver preenchido, é um lembrete de hora fixa** (RF01) |
+| `janela_inicio` | TEXT | `HH:MM` (RF02) |
+| `janela_fim` | TEXT | `HH:MM` (RF02) |
+| `intervalo_min` | INTEGER | minutos entre disparos, dentro da janela (RF02) |
+| `dias_semana` | TEXT | ex.: `seg,qua,sex` |
+| `ativo` | INTEGER | 0/1 |
 
-O campo `ultima_execucao` existe porque a aplicação não corre sem interrupção: se
-for fechada e reaberta às 09:00, tem de saber se o lembrete das 08:30 já disparou.
-Sem esse registo, ou dispara fora de horas ou perde-se — e a informação para decidir
-não existe em lado nenhum.
+**Não há campo `tipo`.** Um lembrete é de hora fixa se `hora` estiver preenchida,
+e recorrente caso contrário. Guardar o tipo *e* os campos que o determinam cria
+duas fontes para a mesma verdade, que mais cedo ou mais tarde discordam.
+
+**O que ficou deliberadamente de fora**, para o MVP não carregar peso que ainda
+não precisa:
+
+| Fora | Porquê |
+|---|---|
+| `accao`, `accao_param` | São o RF07, que é incremental. Acrescentar duas colunas quando o RF07 avançar custa um `ALTER TABLE`; carregá-las agora custa dois campos que ninguém sabe explicar na defesa. |
+| `ultima_execucao` | Existia para decidir se um lembrete das 08:30 devia disparar quando a aplicação abre às 09:00. Essa política é dos problemas mais difíceis de agendamento, e o requisito não a pede: o programa notifica enquanto está aberto. |
+| `titulo` separado de `mensagem` | O título é sempre `RememberME`. Um campo, não dois. |
 
 Este é o **único ponto onde os três colidem**. Tem de estar definido, integrado e congelado antes de qualquer módulo começar.
 
@@ -135,18 +139,18 @@ A resposta às duas: **o Renato entrega o esqueleto com as assinaturas de funç�
 
 | Elemento | Ficheiros | Natureza do trabalho |
 |---|---|---|
-| **Renato** | `models.py`, `storage.py`, `scheduler.py`, `main.py`, `tray.py` | Contrato de dados, persistência, motor de agendamento, composição, bandeja. Mais coordenação, integração e documentação. |
-| **Felipe** | `cli.py` | Preencher os comandos Typer (`add`, `list`, `remove`, `run`), cada um a chamar uma função de `storage.py` que já existe. Trabalho linear, com muitos commits pequenos. |
-| **Niley** | `notifications.py`, mais tarde `actions.py` | Preencher `notificar(titulo, mensagem)` — uma função, um contrato, sem decisões de arquitetura. Depois as ações do RF07. |
+| **Renato** | `models.py`, `storage.py`, `scheduler.py`, `app.py`, `tray.py` | Contrato de dados, persistência, motor de agendamento, composição, bandeja. Mais coordenação, integração e documentação. |
+| **Felipe** | `cli.py` | Preencher os comandos Typer (`add`, `list`, `edit`, `remove`, `on`, `off`), cada um a chamar uma função de `storage.py` que já existe. Trabalho linear, com muitos commits pequenos. |
+| **Niley** | `notifications.py` | Preencher `notificar(mensagem)` — uma função, um contrato, sem decisões de arquitetura. Depois, se o RF07 avançar, as ações. |
 
 ### 4.3 Porque o `tray.py` fica com quem faz a integração
 
 A bandeja é onde o modelo de threads da secção 5.3 se resolve: o `pystray` exige a
 thread principal em macOS e bloqueia-a até o utilizador sair. Esse constrangimento
-atravessa o `main.py` e o `scheduler.py`, que competem pelo mesmo fluxo.
+atravessa o `app.py` e o `scheduler.py`, que competem pelo mesmo fluxo.
 
 O critério é concentrar o risco de threads num ponto só, junto de quem faz a
-integração — o mesmo argumento que atribui o `main.py` e o `scheduler.py`. Dividir
+integração — o mesmo argumento que atribui o `app.py` e o `scheduler.py`. Dividir
 esses três módulos por pessoas diferentes obrigava a coordenar, entre branches, a
 decisão mais delicada do projeto.
 
@@ -159,8 +163,8 @@ comandos independentes, cada um a chamar uma função que já existe.
 |---|---|
 | `.gitignore`, `pyproject.toml` | Renato, uma vez, antes de tudo |
 | `models.py` | Renato escreve, **os três validam** antes de qualquer módulo começar |
-| Revisão de Pull Request | Rotativa — quem não escreveu revê |
-| Empacotamento PyInstaller | Felipe e Niley |
+| Testes | Cada um escreve os testes do seu módulo |
+| Empacotamento PyInstaller | Felipe |
 | Documentação das etapas | Renato, com contributo dos três |
 | README de utilização e guião da demonstração | Felipe |
 | Registo de decisões (`decisoes.md`) | Niley |
@@ -179,7 +183,6 @@ Compensação, registada no `tasks.md` como tarefas com responsável:
 - Testes: cada elemento escreve os do seu módulo.
 - README de utilização, guião da demonstração e empacotamento: Felipe.
 - Registo de decisões técnicas: Niley.
-- Revisão de Pull Request: rotativa e obrigatória — quem não escreveu revê.
 
 A revisão cruzada é o mecanismo mais direto: deixa rasto no repositório e cumpre o
 reforço do enunciado de que os elementos devem rever o trabalho uns dos outros.
@@ -205,25 +208,28 @@ documentação. O registo completo está em [`../../decisoes.md`](../../decisoes
 | Dependências | Nenhuma | `tzlocal` |
 
 **O que decidiu foi a ancoragem.** O `schedule` conta o intervalo a partir do momento
-em que o programa arranca: um lembrete de hora a hora com a aplicação aberta às 08:07
-dispara às 09:07, 10:07, e muda sempre que o computador reinicia. O APScheduler dispara
-às 09:00, 10:00, independentemente do arranque. Para lembretes ligados ao horário da
-aula, horários imprevisíveis são um defeito funcional, não uma preferência de estilo.
+em que o programa arranca — um lembrete de hora a hora dispara em horários diferentes
+a cada reinício. O APScheduler dispara sempre às horas certas, independentemente do
+arranque. Para lembretes ligados ao horário da aula, isso é um defeito funcional, não
+uma preferência de estilo.
 
-O custo é real e foi aceite: uma dependência a mais e mais conceitos a aprender, num
-grupo que não conhecia nenhuma das duas. Fica contido porque `scheduler.py` expõe
-interface própria — `agendar(reminder)`, `remover(id)`, `iniciar()`, `parar()` — e é
-o único ficheiro que conhece a biblioteca. Se a escolha se revelar errada, troca-se
-um ficheiro.
+O custo — mais uma dependência e mais conceitos a aprender — fica contido porque
+`scheduler.py` expõe interface própria (`agendar(reminder)`, `remover(id)`,
+`iniciar()`, `parar()`) e é o único ficheiro que conhece a biblioteca.
 
 **Cuidado a fixar no `models.py`:** `hour="8-14"` inclui as 14h. É preciso decidir e
 escrever se `janela_fim` é inclusivo ou exclusivo.
 
 ### 5.2 Notificações
 
-O `plyer` mantém-se. Nota técnica a validar no spike: em Windows recorre ao balão de notificação clássico, que não permite ações nem fica registado no centro de notificações.
+O `plyer` mantém-se, e `notifications.py` expõe **uma função só**:
+`notificar(mensagem)`.
 
-Por isso `notifications.py` expõe uma função única — `notificar(titulo, mensagem)` — com o backend selecionável internamente: `plyer` por omissão, `pystray.Icon.notify()` como alternativa. É uma decisão de desenho defensável na apresentação: o requisito é notificar o formador, não usar uma biblioteca específica.
+Uma função em vez de chamadas ao `plyer` espalhadas pelo código dá o que
+interessa: se o `plyer` se portar mal em Windows — recorre ao balão clássico,
+que não permite ações nem fica no centro de notificações — troca-se o corpo
+daquela função, num ficheiro, e mais nada muda. É a mesma proteção que uma
+camada de abstração daria, sem a camada.
 
 ### 5.3 Thread principal
 
@@ -239,43 +245,39 @@ O comando `rememberme start` arranca o modo residente, com bandeja e agendador. 
 
 Validar este modelo é o objetivo da Fase 1.
 
-### 5.4 Instância única e paragem
+### 5.4 Como o programa encerra
 
-Os estados por que o processo passa, e como se sai de cada um, estão em
+Os estados por que o processo passa estão em
 [`03-ciclo-de-vida.d2`](03-ciclo-de-vida.d2).
 
-Como o `start` deixa um processo a correr, há duas perguntas a que a aplicação tem de
-saber responder. Cada uma tem um mecanismo próprio, e a razão de serem dois está em
-[`../../decisoes.md`](../../decisoes.md) (D7).
+O `rememberme start` deixa um processo a correr na bandeja. Para o parar de fora
+existe o `rememberme stop` — um comando `start` sem `stop` é uma assimetria que
+ninguém consegue explicar a quem usa o programa.
 
-**"Já há uma instância a correr?"** — o `start` abre um ficheiro na pasta de dados da
-aplicação e pede ao sistema operativo um bloqueio exclusivo, que mantém enquanto viver.
-Bloqueio negado significa que já há outra instância, e recusa arrancar. O PID e a hora
-de arranque ficam escritos dentro do ficheiro, para o `rememberme status` os mostrar.
+Os dois comandos são processos diferentes e não falam um com o outro
+diretamente. Falam pela base de dados, na tabela `estado` (§ 3.1): o `stop`
+escreve `paragem_pedida`, e o processo residente lê essa chave de cinco em cinco
+segundos, num trabalho do próprio agendador, e desliga-se por sua iniciativa —
+agendador primeiro, ícone depois.
 
-O motivo de isto **não** ir para a base de dados: uma linha a dizer que o PID 1234 está
-a correr passa a mentir assim que o processo morre à bruta, e o sistema operativo
-reutiliza PIDs — mais tarde o 1234 é outro programa e a aplicação recusa arrancar para
-sempre. O bloqueio não tem esse problema porque não é informação guardada, é um estado
-do sistema: quando o processo morre, o sistema liberta-o.
+A base de dados é o sítio certo porque o processo residente já lá vai de
+qualquer forma, para apanhar lembretes criados enquanto corre. É o mesmo
+caminho, e fica um só canal entre os comandos e o processo.
 
-**"Alguém pediu para parar?"** — a tabela `estado` (§ 3.1). O `stop` escreve
-`paragem_pedida`; o processo lê-a num job do próprio agendador, de poucos em poucos
-segundos, e desliga-se por sua iniciativa: agendador primeiro, ícone depois. Aqui a base
-de dados é o sítio certo, porque o processo vai precisar de a reler de qualquer forma
-para apanhar lembretes criados enquanto corre — é o mesmo polling, e um só canal entre
-os comandos e o processo residente.
+**Nunca se mata o processo.** Em Windows, terminá-lo à força deixa o ícone na
+bandeja até alguém lhe passar o rato por cima: o programa morreu e continua a
+parecer vivo.
 
-**Nunca se mata o processo.** Em Windows, terminá-lo à força deixa o ícone na bandeja
-até alguém lhe passar o rato por cima: o programa morreu e continua a parecer vivo.
+O item "Sair" do menu da bandeja (RF03) e o `rememberme stop` são dois caminhos
+para a mesma função `encerrar()`, em `app.py`. Duas saídas com código próprio é
+como uma delas se esquece de limpar a tabela.
 
-O item "Sair" do menu da bandeja (RF03) e o `rememberme stop` são dois caminhos para a
-mesma função `encerrar()`. Duas saídas com código próprio é como uma delas se esquece de
-limpar a tabela.
-
-**Nota de implementação:** o bloqueio de ficheiros difere entre sistemas
-(`msvcrt.locking` em Windows, `fcntl.flock` em Unix). São cerca de dez linhas com um `if`
-sobre `sys.platform`, sem dependências novas, e só a metade Windows é testada (RNF01).
+**O que não fazemos: impedir duas instâncias.** Chegou a estar planeado um
+módulo que pedia ao sistema operativo um bloqueio exclusivo sobre um ficheiro,
+com código diferente para Windows e Unix. Foi retirado: nenhum requisito o pede,
+era a única parte do projeto com código dependente do sistema operativo, e só se
+testa a matar processos. Se alguém correr `start` duas vezes ficam dois ícones —
+inconveniente, não defeito. Resolve-se se algum dia incomodar.
 
 ---
 
@@ -316,9 +318,8 @@ Consequência a assumir: entre integrações, as branches divergem por mais temp
 1. Atualizar `develop` antes de criar a branch.
 2. Criar a branch segundo a convenção.
 3. Commits pequenos e frequentes. O enunciado avalia o histórico como evidência de participação individual — um único commit grande no fim penaliza.
-4. Abrir Pull Request para `develop`.
-5. Um colega revê e aprova antes do merge. O enunciado marca o PR como opcional, mas cumpri-lo é evidência direta de colaboração.
-6. `develop` → `master` só em reunião de grupo.
+4. Merge direto em `develop`, no ponto de integração agendado (§ 6.3) — sem Pull Request, porque a divisão por ficheiro (§ 4.2) já evita o conflito que a revisão formal existiria para prevenir.
+5. `develop` → `master` só por Pull Request, em reunião de grupo, no fecho de cada etapa.
 
 ### 6.5 Mensagens de commit
 
@@ -355,15 +356,11 @@ compensado na § 4.5.
 Três ganhos: a decisão do agendador deixa de ser teórica; os riscos R3 e R4 aparecem na primeira semana em vez de na integração final; e os três têm commits reais desde o primeiro dia.
 
 O código dos spikes é descartável, com **uma exceção deliberada**: o da Niley nasce
-já com o contrato final, `notificar(titulo, mensagem)`, e passa a ser o
-`notifications.py`. A razão está no critério de conclusão da Fase 1 — o esqueleto tem
-de disparar uma notificação real, e uma assinatura vazia não dispara nada. Ou o
-coordenador escrevia uma versão provisória para a Niley reescrever depois, ou o
-milestone descia para um `print` no terminal e a integração das três bibliotecas só
-seria testada na Fase 2 — exatamente o risco R3 que a Fase 1 existe para eliminar cedo.
-
-Promover o spike resolve as duas coisas e dá à Niley um módulo integrado na primeira
-semana em vez de um script para deitar fora.
+já com o contrato final, `notificar(mensagem)`, e passa a ser o `notifications.py`.
+A razão é o critério de conclusão da Fase 1 — o esqueleto tem de disparar uma
+notificação real. A alternativa era o coordenador escrever uma versão provisória
+para a Niley reescrever depois, ou descer o milestone a um `print` no terminal —
+adiando para a Fase 2 exatamente o risco (R3) que a Fase 1 existe para eliminar cedo.
 
 > **Concluída quando:** os três spikes correm, e a decisão do agendador está registada em `docs/decisoes.md` — **feita a 04/09/2026, D3**.
 
@@ -371,16 +368,16 @@ semana em vez de um script para deitar fora.
 
 **Responsável:** Renato. **Depende de:** Fase 0. **Bloqueia:** tudo o resto.
 
-- `.gitignore` e `pyproject.toml` com dependências fixadas
+- `.gitignore`, `pyproject.toml` e `uv.lock` com as versões fixadas
 - `docs/decisoes.md` e `docs/tasks.md` atualizados
 - Convenção de branches documentada no `README.md`
 - Renomear a branch `felipe/feature`
 - `models.py` — escrito pelo Renato, **validado pelos três**
-- `main.py` a arrancar bandeja e agendador com um lembrete fixo no código
-- Assinaturas vazias de `cli.py`, já chamadas por `main.py`
+- Os sete módulos criados, com assinaturas e docstrings, sem corpos
+- `app.py` a arrancar bandeja e agendador com um lembrete fixo no código
 - Integração do `notifications.py` entregue pela Niley na Fase 0
 
-> **Concluída quando:** `rememberme start` mostra o ícone na bandeja e dispara uma notificação real; e os três executam `pip install -e .` sem erro na sua máquina.
+> **Concluída quando:** `rememberme start` mostra o ícone na bandeja e dispara uma notificação real; e os três executam `uv sync` sem erro na sua máquina.
 >
 > **Porquê antes de dividir:** se o modelo de threads da secção 5.3 estiver errado, é muito melhor descobri-lo agora do que com três módulos já escritos por cima.
 
@@ -438,16 +435,13 @@ diz-nos onde cada documento pertence: os requisitos não se reabrem na Etapa 3, 
 decisões de tecnologia não se tomam na Etapa 4.
 
 **Onde o nosso trabalho não é cascata, e porquê.** O modelo pressupõe o projeto
-fechado antes de haver código. A Fase 0 contraria isso de propósito: nenhum de nós
-conhecia as bibliotecas, e um projeto desenhado sobre bibliotecas que ninguém experimentou
-é adivinhação. Os spikes da Fase 0 são código, mas são código para decidir, não para
-entregar — e foi um deles que fechou a escolha do agendador (D3), que sem ele teria
-ficado "schedule ou APScheduler" no entregável da Etapa 2.
+fechado antes de haver código. A Fase 0 contraria isso de propósito: um projeto
+desenhado sobre bibliotecas que ninguém experimentou é adivinhação — foi um spike,
+não a leitura de documentação, que fechou a escolha do agendador (D3).
 
-A consequência é que algumas decisões desta etapa vão mudar durante a implementação.
-Isso não se esconde: cada mudança fica no `docs/decisoes.md` com data e motivo. Um
-histórico que mostra decisões a evoluir com fundamento é matéria da Etapa 3 — é a
-diferença entre um grupo que reviu o projeto e um grupo que improvisou.
+A consequência: algumas decisões desta etapa mudam durante a implementação, e isso
+fica registado no `docs/decisoes.md` com data e motivo — a diferença entre um grupo
+que reviu o projeto e um grupo que improvisou.
 
 ---
 
@@ -486,7 +480,7 @@ O **M1** é o primeiro milestone a registar no GitHub, conforme o ponto 6 da Eta
 | R5 | RF02 exigir lógica manual, se a escolha for `schedule` | Decisão informada pelo spike; lógica isolada atrás da interface própria |
 | R6 | Curva de aprendizagem das bibliotecas maior que o previsto | Fase 0 mede-a antes de o cronograma depender dela |
 | R7 | Divergência das branches entre pontos de integração | `models.py` congelado antes da Fase 2 — é o único ponto de colisão real |
-| R8 | Participação desequilibrada no histórico Git | Ficheiros distintos por elemento + revisão cruzada de PR |
+| R8 | Participação desequilibrada no histórico Git | Ficheiros distintos por elemento (§ 4.2) + tarefas de compensação atribuídas no `tasks.md` (§ 4.5) |
 | R9 | Falta de tempo para os requisitos incrementais | Ordem de prioridade fixada na Fase 3; RF07–RF10 já marcados como opcionais na Etapa 1 |
 | R10 | Testes apenas em Windows | Já assumido e justificado na Etapa 1; manter documentado como limitação conhecida |
 | R11 | O PyInstaller pode não empacotar o backend do `plyer`, que é importado dinamicamente e escapa à análise estática. Sintoma: corre em desenvolvimento, falha no executável | Verificar logo no primeiro empacotamento, não na véspera da entrega; mitigação conhecida é declarar `--hidden-import` |
@@ -498,6 +492,6 @@ O **M1** é o primeiro milestone a registar no GitHub, conforme o ponto 6 da Eta
 Uma tarefa passa a `pronto` quando:
 
 1. O código corre sem erros na máquina de quem o escreveu;
-2. Está integrado em `develop` através de Pull Request revisto por outro elemento;
+2. Está integrado em `develop` no ponto de integração agendado (§ 6.3);
 3. O `docs/tasks.md` foi atualizado no mesmo commit ou no seguinte;
 4. Se altera comportamento visível ao utilizador, o `README.md` reflete a mudança.
