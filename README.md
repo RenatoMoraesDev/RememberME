@@ -12,8 +12,7 @@ Projeto final do curso IEFP — Programação, Nível 5 (formador: CID).
 
 ## Status
 
-Etapa 1: Definição do Problema e Análise de Requisitos. - Concluída
-Etapa 2: Definição do projecto. - Entrega a **04/09/2026**.
+Etapa 1 concluída. Etapa 2 concluída — stack e arquitetura decididas ([`plano-desenvolvimento.md`](docs/entregaveis/etapa-2-projeto/plano-desenvolvimento.md)).
 
 ## Como começar
 
@@ -99,7 +98,7 @@ uv run rememberme stop
 
 ## Stack
 
-Em avaliação, decisão formal prevista para a Etapa 2 (Arquitetura, Tecnologias e Planeamento). Cogitado até agora:
+Decidida na Etapa 2. As versões estão fixadas no `pyproject.toml`, para que os três instalem exatamente o mesmo.
 
 | Área | Tecnologia |
 |---|---|
@@ -139,7 +138,7 @@ As restantes seguem a convenção `<tipo>/<nome>-<descrição>`:
 
 ### Integração
 
-Pull Request para `develop`, revisto por outro elemento antes do merge.
+Merge direto em `develop`, nos pontos de integração agendados. `develop` → `master` só por Pull Request, em reunião de grupo.
 
 ## Contribuidores
 
