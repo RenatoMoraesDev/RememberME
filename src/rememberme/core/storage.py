@@ -1,1 +1,0 @@
-# Gestão de caminhos (AppDir do Typer) e BD

@@ -1,1 +1,0 @@
-# Ícone de bandeja (ex: pystray)
