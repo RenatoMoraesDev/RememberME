@@ -184,9 +184,6 @@ Compensação, registada no `tasks.md` como tarefas com responsável:
 - README de utilização, guião da demonstração e empacotamento: Felipe.
 - Registo de decisões técnicas: Niley.
 
-A revisão cruzada é o mecanismo mais direto: deixa rasto no repositório e cumpre o
-reforço do enunciado de que os elementos devem rever o trabalho uns dos outros.
-
 ---
 
 ## 5. Decisões técnicas
