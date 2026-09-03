@@ -1,0 +1,81 @@
+# Ciclo de vida do processo residente do RememberME.
+# Documenta a decisão D7 (instância única e paragem ordenada).
+# Render: d2 03-ciclo-de-vida.d2 diagrama_ciclo_de_vida.png
+
+direction: down
+
+inicio: {
+  shape: circle
+  label: ""
+  width: 30
+  style.fill: "#2b2b2b"
+}
+
+Parado: {
+  label: "Parado\n\nsem processo\nsem bloqueio"
+  shape: rectangle
+}
+
+Arranque: {
+  label: "A arrancar\n\npede o bloqueio do\nficheiro de instância"
+  shape: rectangle
+}
+
+Recusado: {
+  label: "Recusado\n\n\"já está a correr\"\nsai com código 1"
+  shape: rectangle
+  style.stroke-dash: 3
+}
+
+Ativo: {
+  label: "A correr\n\nícone na bandeja\nagendador a disparar\nvigia a tabela estado"
+  shape: rectangle
+  style.bold: true
+}
+
+Encerramento: {
+  label: "A encerrar\n\npára o agendador\nretira o ícone\nlimpa paragem_pedida"
+  shape: rectangle
+}
+
+inicio -> Parado
+
+Parado -> Arranque: "rememberme start\n(ou duplo clique)"
+
+Arranque -> Recusado: "bloqueio negado:\noutra instância tem-no"
+Arranque -> Ativo: "bloqueio obtido\nescreve PID e hora\nno ficheiro"
+
+Recusado -> Parado: "termina" {
+  style.stroke-dash: 3
+}
+
+Ativo -> Encerramento: "paragem_pedida = 1\nna tabela estado\n(rememberme stop)"
+Ativo -> Encerramento: "\"Sair\" no menu\nda bandeja"
+
+Encerramento -> Parado: "liberta o bloqueio\ne termina"
+
+Ativo -> Parado: "morte abrupta\n(o SO liberta o bloqueio;\no ícone fica na bandeja\naté alguém lhe passar\no rato por cima)" {
+  style.stroke: "#c0392b"
+  style.stroke-dash: 4
+}
+
+nota: |md
+  ### Porquê duas coisas distintas
+
+  **O bloqueio** responde a *"já há uma instância?"*.
+  É um estado do sistema operativo: liberta-se sozinho
+  quando o processo morre, seja como for que morra.
+  É por isso que a seta vermelha chega a **Parado**
+  sem passar por *A encerrar* e sem deixar lixo.
+
+  **A tabela `estado`** responde a *"alguém pediu para parar?"*.
+  É informação, escrita por outro processo, lida no mesmo
+  polling que o processo já vai precisar de fazer à base
+  de dados para apanhar lembretes novos.
+
+  Um PID guardado em tabela não servia para a primeira
+  pergunta: ficaria a mentir depois da seta vermelha, e
+  o sistema reutiliza PIDs.
+| {
+  near: bottom-center
+}
