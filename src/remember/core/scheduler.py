@@ -1,1 +1,0 @@
-# Agendamento de tarefas em background
