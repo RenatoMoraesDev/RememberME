@@ -25,7 +25,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Reorganizar a documentação por etapa | Renato | em-desenvolvimento | 03/09/2026 | — |
 | Plano de desenvolvimento (item 7) | Renato | em-desenvolvimento | 03/09/2026 | — |
 | Nomenclatura de branches no README | Renato | pendente | 03/09/2026 | — |
-| Renomear a branch `felipe/feature` | Felipe | pendente | 03/09/2026 | convenção definida |
+
 | Criar o milestone M1 no GitHub | Renato | pendente | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
 | Entrega da Etapa 2 | Todos | pendente | 04/09/2026 | itens acima |
