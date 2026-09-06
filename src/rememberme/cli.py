@@ -61,9 +61,54 @@ def add(
 
     Ou `--as`, ou `--entre` **e** `--a-cada`. Nunca as duas formas.
     """
-    # TODO (Felipe): validar a combinacao, construir o Lembrete,
-    #                chamar storage.criar() e escrever o id ao utilizador.
-    raise NotImplementedError("Felipe: preencher")
+    if as_ and entre:
+        raise typer.BadParameter(
+            "use --as ou --entre, mas nao os dois"
+        )
+
+    if as_ and a_cada is not None:
+        raise typer.BadParameter(
+            "--a-cada so pode ser usado com --entre"
+        )
+
+    if entre and a_cada is None:
+        raise typer.BadParameter(
+            "--entre exige --a-cada"
+        )
+
+    if not as_ and not entre:
+        raise typer.BadParameter(
+            "indique --as ou --entre"
+        )
+
+    janela_inicio = None
+    janela_fim = None
+
+    if entre:
+        partes = entre.split("-")
+
+        if len(partes) != 2:
+            raise typer.BadParameter(
+                "--entre deve estar no formato HH:MM-HH:MM"
+            )
+
+        janela_inicio, janela_fim = partes
+
+        hora_valida(janela_inicio)
+        hora_valida(janela_fim)
+
+    lembrete = Lembrete(
+        texto=texto,
+        hora=as_,
+        janela_inicio=janela_inicio,
+        janela_fim=janela_fim,
+        intervalo_min=a_cada,
+        dias_semana=dias,
+    )
+
+    lembrete_criado = storage.criar(lembrete)
+
+    typer.echo(f"Lembrete criado com ID {lembrete_criado.id}")    
 
 
 @app.command("list")
