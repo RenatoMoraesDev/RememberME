@@ -35,9 +35,11 @@ def iniciar(ao_disparar: Callable[[Lembrete], None]) -> None:
 
 def agendar(lembrete: Lembrete) -> None:
     """Põe um lembrete a disparar. Se já lá estava, substitui."""
+    dias_aps = ",".join(DIAS_APS[d] for d in lembrete.dias())
+
     if lembrete.e_hora_fixa:
         hora, minuto = int(lembrete.hora.split(":")[0]), int(lembrete.hora.split(":")[1])
-        trigger = CronTrigger(hour=hora, minute=minuto)
+        trigger = CronTrigger(hour=hora, minute=minuto, day_of_week=dias_aps)
         _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
     else:
         inicio, fim = int(lembrete.janela_inicio.split(":")[0]), int(lembrete.janela_fim.split(":")[0])
@@ -45,7 +47,7 @@ def agendar(lembrete: Lembrete) -> None:
             minuto = "0"
         else:
             minuto = f"*/{lembrete.intervalo_min}"
-        trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=minuto)
+        trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=minuto, day_of_week=dias_aps)
         _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
 
 
