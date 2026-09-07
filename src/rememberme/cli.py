@@ -236,17 +236,6 @@ def edit(
     typer.echo(f"Lembrete {id} atualizado.")
 
 @app.command()
-def remove(id: int):
-    """Apaga um lembrete (RF06)."""
-    apagou = storage.apagar(id)
-    if apagou:
-        typer.echo(f"Lembrete {id} apagado.")
-    else:
-        typer.echo(f"Lembrete {id} não encontrado.")
-
-
-
-@app.command()
 def on(id: int):
     """Ativa um lembrete."""
     raise NotImplementedError("Felipe: preencher")
