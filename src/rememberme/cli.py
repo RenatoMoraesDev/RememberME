@@ -153,12 +153,87 @@ def listar():
     for linha in linhas:
         typer.echo(format_row(linha))
     
-
 @app.command()
-def edit(id: int):
+def remove(id: int):
+    """Apaga um lembrete (RF06)."""
+    apagou = storage.apagar(id)
+    if apagou:
+        typer.echo(f"Lembrete {id} removido.")
+    else:
+        typer.echo(f"Lembrete {id} nao existe.")
+@app.command()
+def edit(
+    id: int,
+    texto: Optional[str] = typer.Option(
+        None, "--texto", help="Novo texto do lembrete.",
+    ),
+    as_: Optional[str] = typer.Option(
+        None, "--as", callback=hora_valida, help="Hora fixa: --as 08:30",
+    ),
+    entre: Optional[str] = typer.Option(
+        None, "--entre", help="Janela de horario: --entre 08:00-14:00",
+    ),
+    a_cada: Optional[int] = typer.Option(
+        None, "--a-cada", min=1, help="Minutos entre disparos, dentro da janela.",
+    ),
+    dias: Optional[str] = typer.Option(
+        None, "--dias", help="Dias: --dias seg,qua,sex",
+    ),
+):
     """Altera um lembrete existente (RF06)."""
-    # TODO (Felipe): storage.obter(), aplicar as opcoes, storage.atualizar().
-    raise NotImplementedError("Felipe: preencher")
+    lembrete = storage.obter(id)
+    if lembrete is None:
+        typer.echo(f"Lembrete {id} não encontrado.")
+        return
+
+    if texto is None and as_ is None and entre is None and a_cada is None and dias is None:
+        raise typer.BadParameter(
+            "indique pelo menos uma alteracao: --texto, --as, --entre, --a-cada ou --dias"
+        )
+
+    if as_ and entre:
+        raise typer.BadParameter("use --as ou --entre, mas nao os dois")
+
+    if a_cada is not None and entre is None:
+        raise typer.BadParameter("--a-cada so pode ser usado com --entre")
+
+    if as_ and a_cada is not None:
+        raise typer.BadParameter("--a-cada so pode ser usado com --entre")
+
+    if entre and a_cada is None:
+        raise typer.BadParameter("--entre exige --a-cada")
+
+    if texto is not None:
+        lembrete.texto = texto
+
+    if dias is not None:
+        lembrete.dias_semana = dias
+
+    if as_ is not None:
+        lembrete.hora = as_
+        lembrete.janela_inicio = None
+        lembrete.janela_fim = None
+        lembrete.intervalo_min = None
+
+    if entre is not None:
+        partes = entre.split("-")
+        if len(partes) != 2:
+            raise typer.BadParameter("--entre deve estar no formato HH:MM-HH:MM")
+
+        janela_inicio, janela_fim = partes
+        hora_valida(janela_inicio)
+        hora_valida(janela_fim)
+
+        lembrete.hora = None
+        lembrete.janela_inicio = janela_inicio
+        lembrete.janela_fim = janela_fim
+        lembrete.intervalo_min = a_cada
+
+    if a_cada is not None and entre is None and lembrete.janela_inicio is not None:
+        lembrete.intervalo_min = a_cada
+
+    storage.atualizar(lembrete)
+    typer.echo(f"Lembrete {id} atualizado.")
 
 @app.command()
 def remove(id: int):
