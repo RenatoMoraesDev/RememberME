@@ -160,12 +160,15 @@ def edit(id: int):
     # TODO (Felipe): storage.obter(), aplicar as opcoes, storage.atualizar().
     raise NotImplementedError("Felipe: preencher")
 
-
 @app.command()
 def remove(id: int):
     """Apaga um lembrete (RF06)."""
-    # TODO (Felipe): storage.apagar(id) e dizer se apagou ou se nao existia.
-    raise NotImplementedError("Felipe: preencher")
+    apagou = storage.apagar(id)
+    if apagou:
+        typer.echo(f"Lembrete {id} apagado.")
+    else:
+        typer.echo(f"Lembrete {id} não encontrado.")
+
 
 
 @app.command()
