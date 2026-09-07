@@ -41,13 +41,17 @@ def agendar(lembrete: Lembrete) -> None:
         _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
     else:
         inicio, fim = int(lembrete.janela_inicio.split(":")[0]), int(lembrete.janela_fim.split(":")[0])
-        trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=f"*/{lembrete.intervalo}")
+        if lembrete.intervalo_min == 60:
+            minuto = "0"
+        else:
+            minuto = f"*/{lembrete.intervalo_min}"
+        trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=minuto)
         _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
 
 
 def remover(id: int) -> None:
     """Tira um lembrete do agendador. Não apaga da base de dados."""
-    raise NotImplementedError
+    _scheduler.remove_job(str(id))
 
 
 def parar() -> None:
