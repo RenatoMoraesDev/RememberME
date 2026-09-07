@@ -54,8 +54,7 @@ def arrancar() -> None:
     for lembrete in storage.listar(apenas_ativos=True):
         scheduler.agendar(lembrete)
 
-    # TODO (Renato): pedir ao agendador que chame vigiar_paragem() de
-    # INTERVALO_VIGIA em INTERVALO_VIGIA segundos.
+    scheduler.agendar_intervalo(vigiar_paragem, INTERVALO_VIGIA)
 
     tray.arrancar(ao_sair=encerrar)  # bloqueia aqui
 

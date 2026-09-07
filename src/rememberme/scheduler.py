@@ -11,6 +11,7 @@ from typing import Callable
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.interval import IntervalTrigger
 
 from rememberme.models import Lembrete
 
@@ -50,11 +51,13 @@ def agendar(lembrete: Lembrete) -> None:
         trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=minuto, day_of_week=dias_aps)
         _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
 
+def agendar_intervalo(funcao, segundos: int) -> None:
+    """Chama `funcao` (sem argumentos) a cada `segundos`. Usado pela vigia da paragem."""
+    _scheduler.add_job(funcao, IntervalTrigger(seconds=segundos), id=funcao.__name__, replace_existing=True)
 
 def remover(id: int) -> None:
     """Tira um lembrete do agendador. Não apaga da base de dados."""
     _scheduler.remove_job(str(id))
-
 
 def parar() -> None:
     """Desliga o agendador. Chamado pelo `encerrar()` do app.py."""
