@@ -28,7 +28,7 @@ def iniciar(ao_disparar: Callable[[Lembrete], None]) -> None:
     `ao_disparar` é chamada com o lembrete sempre que chega a hora. Quem chama
     decide o que fazer - normalmente notificar.
     """
-    global _scheduler
+    global _scheduler, _ao_disparar
     _ao_disparar = ao_disparar
     _scheduler = BackgroundScheduler()
     _scheduler.start()
