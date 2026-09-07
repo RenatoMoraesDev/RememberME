@@ -114,9 +114,45 @@ def add(
 @app.command("list")
 def listar():
     """Mostra os lembretes gravados."""
-    # TODO (Felipe): storage.listar() e imprimir em tabela.
-    raise NotImplementedError("Felipe: preencher")
+    lembretes = storage.listar()
 
+    if not lembretes:
+        typer.echo("Nenhum lembrete encontrado.")
+        return
+
+    linhas = []
+    for lembrete in lembretes:
+        if lembrete.e_hora_fixa:
+            tipo = "hora"
+            agenda = lembrete.hora
+        else:
+            tipo = "janela"
+            agenda = f"{lembrete.janela_inicio}-{lembrete.janela_fim} ({lembrete.intervalo_min} min)"
+
+        linhas.append([
+            str(lembrete.id),
+            lembrete.texto,
+            tipo,
+            agenda,
+            lembrete.dias_semana,
+            "sim" if lembrete.ativo else "nao",
+        ])
+
+    headers = ["ID", "Texto", "Tipo", "Agenda", "Dias", "Ativo"]
+    largura = []
+    for i in range(len(headers)):
+        largura.append(max(len(headers[i]), *(len(linha[i]) for linha in linhas)))
+
+    def format_row(row):
+        return " | ".join(str(row[i]).ljust(largura[i]) for i in range(len(row)))
+
+    
+
+    typer.echo(format_row(headers))
+    typer.echo("-+-".join("-" * largura[i] for i in range(len(headers))))
+    for linha in linhas:
+        typer.echo(format_row(linha))
+    
 
 @app.command()
 def edit(id: int):
