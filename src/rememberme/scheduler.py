@@ -35,10 +35,14 @@ def iniciar(ao_disparar: Callable[[Lembrete], None]) -> None:
 
 def agendar(lembrete: Lembrete) -> None:
     """Põe um lembrete a disparar. Se já lá estava, substitui."""
-    hora, minuto = int(lembrete.hora.split(":")[0]), int(lembrete.hora.split(":")[1])
-    trigger = CronTrigger(hour=hora, minute=minuto)
-    _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
-
+    if lembrete.e_hora_fixa:
+        hora, minuto = int(lembrete.hora.split(":")[0]), int(lembrete.hora.split(":")[1])
+        trigger = CronTrigger(hour=hora, minute=minuto)
+        _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
+    else:
+        inicio, fim = int(lembrete.janela_inicio.split(":")[0]), int(lembrete.janela_fim.split(":")[0])
+        trigger = CronTrigger(hour=f"{inicio}-{fim}", minute=f"*/{lembrete.intervalo}")
+        _scheduler.add_job(_disparar, trigger, id=str(lembrete.id), args=(lembrete,),replace_existing=True)
 
 
 def remover(id: int) -> None:
