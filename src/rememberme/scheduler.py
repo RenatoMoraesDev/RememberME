@@ -9,12 +9,16 @@
 
 from typing import Callable
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from rememberme.models import Lembrete
+
 
 #: Traducao pt-en para os do APScheduler.
 DIAS_APS = {"seg": "mon", "ter": "tue", "qua": "wed", "qui": "thu",
             "sex": "fri", "sab": "sat", "dom": "sun"}
 
+_scheduler = None
 
 def iniciar(ao_disparar: Callable[[Lembrete], None]) -> None:
     """Arranca o agendador em segundo plano.
@@ -23,8 +27,9 @@ def iniciar(ao_disparar: Callable[[Lembrete], None]) -> None:
     decide o que fazer - normalmente notificar.
     """
     # TODO (Renato): BackgroundScheduler().start()
-    raise NotImplementedError
-
+    global _scheduler
+    _scheduler = BackgroundScheduler()
+    _scheduler.start()
 
 def agendar(lembrete: Lembrete) -> None:
     """Põe um lembrete a disparar. Se já lá estava, substitui."""
@@ -38,4 +43,4 @@ def remover(id: int) -> None:
 
 def parar() -> None:
     """Desliga o agendador. Chamado pelo `encerrar()` do app.py."""
-    raise NotImplementedError
+    _scheduler.shutdown(wait=False)
