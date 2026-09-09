@@ -238,13 +238,32 @@ def edit(
 @app.command()
 def on(id: int):
     """Ativa um lembrete."""
-    raise NotImplementedError("Felipe: preencher")
+    lembrete = storage.obter(id)
+
+    if lembrete is None:
+        typer.echo(f"Lembrete {id} nao encontrado.")
+        return
+
+    lembrete.ativo = True
+    storage.atualizar(lembrete)
+    typer.echo(f"Lembrete {id} ativado.")
 
 
 @app.command()
 def off(id: int):
     """Desativa um lembrete sem o apagar."""
-    raise NotImplementedError("Felipe: preencher")
+    lembrete = storage.obter(id)
+
+    if lembrete is None:
+        typer.echo(f"Lembrete {id} nao encontrado.")
+        return
+
+    lembrete.ativo = False
+    storage.atualizar(lembrete)
+    typer.echo(f"Lembrete {id} desativado.")
+
+
+
 
 
 # o programa residente   [Renato] 
