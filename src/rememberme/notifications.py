@@ -12,4 +12,8 @@ def notificar(mensagem: str, titulo: str = TITULO) -> None:
     abaixo o programa todo.
     """
     # TODO (Niley): plyer.notification.notify(title=..., message=..., timeout=10)
-    raise NotImplementedError("Niley: preencher com o plyer")
+    try:
+        print (f"NOTIFICACAO: {titulo}: {mensagem}")
+    except Exception as e:
+        print(f"Erro ao notificar: {e}")
+        # raise NotImplementedError("Niley: preencher com o plyer")
