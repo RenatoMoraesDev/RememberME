@@ -5,6 +5,8 @@
 TITULO = "RememberME"
 
 
+from plyer import notification
+
 def notificar(mensagem: str, titulo: str = TITULO) -> None:
     """Mostra uma notificacao.
 
