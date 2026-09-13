@@ -21,10 +21,10 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Organização inicial do repositório | Renato | pronto | 02/09/2026 | — |
+| Organização inicial do repositório | Renato | pronto | 13/09/2026 | — |
 | Reorganizar a documentação por etapa | Renato | pronto | 03/09/2026 | — |
 | Plano de desenvolvimento (item 7) | Renato | em-desenvolvimento | 03/09/2026 | — |
-| Nomenclatura de branches no README | Renato | pendente | 03/09/2026 | — |
+| Nomenclatura de branches no README | Renato |pronto | 03/09/2026 | — |
 
 | Criar o milestone M1 no GitHub | Renato | pendente | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
