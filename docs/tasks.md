@@ -28,7 +28,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 
 | Criar o milestone M1 no GitHub | Renato | pendente | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
-| Entrega da Etapa 2 | Todos | pendente | 04/09/2026 | itens acima |
+| Entrega da Etapa 2 | Todos | Pronto | 04/09/2026 | itens acima |
 
 ## Fase 0 — Capacitação
 
