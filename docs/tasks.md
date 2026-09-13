@@ -34,11 +34,11 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | em-desenvolvimento | 07/09/2026 | contrato da função |
-| Estudo do `pystray`: ícone com menu "Sair" | Renato | em-desenvolvimento | 07/09/2026 | — |
+| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | Pronto | 07/09/2026 | contrato da função |
+| Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
 | Estudo do `Typer`: comando que escreve na base de dados | Felipe | em-desenvolvimento | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
-| Reunião: validar a escolha do agendador | Todos | pendente | 04/09/2026 | comparação e spikes |
+| Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
 | Plano de comandos do CLI (casos de uso) | Renato | em-desenvolvimento | 07/09/2026 | — |
 | Validar o plano de comandos com o grupo | Todos | pendente | 09/09/2026 | plano de comandos |
 
