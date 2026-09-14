@@ -18,7 +18,23 @@ INTERVALO_VIGIA = 5
 
 def ao_disparar(lembrete: Lembrete) -> None:
     """Chamada pelo agendador quando chega a hora de um lembrete."""
-    notifications.notificar(lembrete.texto)
+    if lembrete.accao == "abrir":
+        #abrir URL ou app
+        import webbrowser
+        webbrowser.open(lembrete.accao_param)
+
+    elif lembrete.accao =="som":
+        #tocar som
+        import winsound
+        winsound.PlaySound(lembrete.accao_param, winsound.SND_FILENAME)
+
+    elif lembrete.accao == "popup":
+        #mostra popup
+        from tkinter import messagebox
+        messagebox.showinfo("lembrete", lembrete.accao_param or lembrete.texto)
+
+    else:
+        notifications.notificar(lembrete.texto)
 
 
 def vigiar_paragem() -> None:
