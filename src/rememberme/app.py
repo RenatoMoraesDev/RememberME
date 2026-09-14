@@ -74,8 +74,8 @@ def arrancar_em_segundo_plano() -> None:
 def _arrancar_windows() -> None:
     """Arranca o programa em Windows."""
     subprocess.Popen(
-        [sys.executable, "-m", "rememberme", "start"],
-        creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+        [sys.executable, "-m", "rememberme", "start", "--debug"],
+        creationflags=subprocess.CREATE_NO_WINDOW,
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
@@ -86,7 +86,7 @@ def _arrancar_windows() -> None:
 def _arrancar_posix() -> None:
     """Arranca o programa em Linux e MacOS."""
     subprocess.Popen(
-        [sys.executable, "-m", "rememberme", "start"],
+        [sys.executable, "-m", "rememberme", "start", "--debug"],
         start_new_session=True,
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,
