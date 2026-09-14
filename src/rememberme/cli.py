@@ -32,7 +32,8 @@ from rememberme.models import DIAS, Lembrete
 app = typer.Typer(help="Lembretes de tarefas recorrentes.")
 
 
-# validacao partilhada 
+# validacao partilhada
+
 
 def hora_valida(valor: Optional[str]) -> Optional[str]:
     """Aceita HH:MM. Usada no `callback=` das opcoes de hora."""
@@ -45,41 +46,36 @@ def hora_valida(valor: Optional[str]) -> Optional[str]:
 
 # lembretes
 
+
 @app.command()
 def add(
     texto: str = typer.Argument(..., help="O que o lembrete diz."),
     as_: Optional[str] = typer.Option(
-        None, "--as", callback=hora_valida, help="Hora fixa: --as 08:30"),
+        None, "--as", callback=hora_valida, help="Hora fixa: --as 08:30"
+    ),
     entre: Optional[str] = typer.Option(
-        None, "--entre", help="Janela de horario: --entre 08:00-14:00"),
+        None, "--entre", help="Janela de horario: --entre 08:00-14:00"
+    ),
     a_cada: Optional[int] = typer.Option(
-        None, "--a-cada", min=1, help="Minutos entre disparos, dentro da janela."),
-    dias: str = typer.Option(
-        ",".join(DIAS), "--dias", help="Dias: --dias seg,qua,sex"),
+        None, "--a-cada", min=1, help="Minutos entre disparos, dentro da janela."
+    ),
+    dias: str = typer.Option(",".join(DIAS), "--dias", help="Dias: --dias seg,qua,sex"),
 ):
     """Acrescenta um lembrete.
 
     Ou `--as`, ou `--entre` **e** `--a-cada`. Nunca as duas formas.
     """
     if as_ and entre:
-        raise typer.BadParameter(
-            "use --as ou --entre, mas nao os dois"
-        )
+        raise typer.BadParameter("use --as ou --entre, mas nao os dois")
 
     if as_ and a_cada is not None:
-        raise typer.BadParameter(
-            "--a-cada so pode ser usado com --entre"
-        )
+        raise typer.BadParameter("--a-cada so pode ser usado com --entre")
 
     if entre and a_cada is None:
-        raise typer.BadParameter(
-            "--entre exige --a-cada"
-        )
+        raise typer.BadParameter("--entre exige --a-cada")
 
     if not as_ and not entre:
-        raise typer.BadParameter(
-            "indique --as ou --entre"
-        )
+        raise typer.BadParameter("indique --as ou --entre")
 
     janela_inicio = None
     janela_fim = None
@@ -88,9 +84,7 @@ def add(
         partes = entre.split("-")
 
         if len(partes) != 2:
-            raise typer.BadParameter(
-                "--entre deve estar no formato HH:MM-HH:MM"
-            )
+            raise typer.BadParameter("--entre deve estar no formato HH:MM-HH:MM")
 
         janela_inicio, janela_fim = partes
 
@@ -108,7 +102,7 @@ def add(
 
     lembrete_criado = storage.criar(lembrete)
 
-    typer.echo(f"Lembrete criado com ID {lembrete_criado.id}")    
+    typer.echo(f"Lembrete criado com ID {lembrete_criado.id}")
 
 
 @app.command("list")
@@ -129,14 +123,16 @@ def listar():
             tipo = "janela"
             agenda = f"{lembrete.janela_inicio}-{lembrete.janela_fim} ({lembrete.intervalo_min} min)"
 
-        linhas.append([
-            str(lembrete.id),
-            lembrete.texto,
-            tipo,
-            agenda,
-            lembrete.dias_semana,
-            "sim" if lembrete.ativo else "nao",
-        ])
+        linhas.append(
+            [
+                str(lembrete.id),
+                lembrete.texto,
+                tipo,
+                agenda,
+                lembrete.dias_semana,
+                "sim" if lembrete.ativo else "nao",
+            ]
+        )
 
     headers = ["ID", "Texto", "Tipo", "Agenda", "Dias", "Ativo"]
     largura = []
@@ -146,13 +142,12 @@ def listar():
     def format_row(row):
         return " | ".join(str(row[i]).ljust(largura[i]) for i in range(len(row)))
 
-    
-
     typer.echo(format_row(headers))
     typer.echo("-+-".join("-" * largura[i] for i in range(len(headers))))
     for linha in linhas:
         typer.echo(format_row(linha))
-    
+
+
 @app.command()
 def remove(id: int):
     """Apaga um lembrete (RF06)."""
@@ -161,23 +156,37 @@ def remove(id: int):
         typer.echo(f"Lembrete {id} removido.")
     else:
         typer.echo(f"Lembrete {id} nao existe.")
+
+
 @app.command()
 def edit(
     id: int,
     texto: Optional[str] = typer.Option(
-        None, "--texto", help="Novo texto do lembrete.",
+        None,
+        "--texto",
+        help="Novo texto do lembrete.",
     ),
     as_: Optional[str] = typer.Option(
-        None, "--as", callback=hora_valida, help="Hora fixa: --as 08:30",
+        None,
+        "--as",
+        callback=hora_valida,
+        help="Hora fixa: --as 08:30",
     ),
     entre: Optional[str] = typer.Option(
-        None, "--entre", help="Janela de horario: --entre 08:00-14:00",
+        None,
+        "--entre",
+        help="Janela de horario: --entre 08:00-14:00",
     ),
     a_cada: Optional[int] = typer.Option(
-        None, "--a-cada", min=1, help="Minutos entre disparos, dentro da janela.",
+        None,
+        "--a-cada",
+        min=1,
+        help="Minutos entre disparos, dentro da janela.",
     ),
     dias: Optional[str] = typer.Option(
-        None, "--dias", help="Dias: --dias seg,qua,sex",
+        None,
+        "--dias",
+        help="Dias: --dias seg,qua,sex",
     ),
 ):
     """Altera um lembrete existente (RF06)."""
@@ -186,7 +195,13 @@ def edit(
         typer.echo(f"Lembrete {id} não encontrado.")
         return
 
-    if texto is None and as_ is None and entre is None and a_cada is None and dias is None:
+    if (
+        texto is None
+        and as_ is None
+        and entre is None
+        and a_cada is None
+        and dias is None
+    ):
         raise typer.BadParameter(
             "indique pelo menos uma alteracao: --texto, --as, --entre, --a-cada ou --dias"
         )
@@ -235,6 +250,7 @@ def edit(
     storage.atualizar(lembrete)
     typer.echo(f"Lembrete {id} atualizado.")
 
+
 @app.command()
 def on(id: int):
     """Ativa um lembrete."""
@@ -263,15 +279,21 @@ def off(id: int):
     typer.echo(f"Lembrete {id} desativado.")
 
 
+# o programa residente   [Renato]
 
-
-
-# o programa residente   [Renato] 
 
 @app.command()
-def start():
-    """Arranca a bandeja e o agendador. Fica a correr ate' ao `stop`."""
-    aplicacao.arrancar()
+def start(
+    primeiro_plano: bool = typer.Option(
+        False, "--debug", help="Corre bloqueado no terminal, sem desanexar (para depuração)."
+    ),
+):
+    """Arranca a bandeja e o agendador."""
+    if primeiro_plano:
+        aplicacao.arrancar()
+    else:
+        aplicacao.arrancar_em_segundo_plano()
+
 
 
 @app.command()
