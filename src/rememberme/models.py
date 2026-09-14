@@ -33,7 +33,6 @@ class Lembrete:
     dias_semana: str = ",".join(DIAS)
     ativo: bool = True
     id: Optional[int] = None  # None enquanto nao foi gravado
-    accao_param:Optional[str]= None
     accao: str ="notificacao"
     accao_param: Optional[str] =None
 
