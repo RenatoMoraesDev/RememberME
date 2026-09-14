@@ -36,7 +36,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 |---|---|---|---|---|
 | Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | Pronto | 07/09/2026 | contrato da função |
 | Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
-| Estudo do `Typer`: comando que escreve na base de dados | Felipe | em-desenvolvimento | 07/09/2026 | — |
+| Estudo do `Typer`: comando que escreve na base de dados | Felipe | prontoo | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
 | Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
 | Plano de comandos do CLI (casos de uso) | Renato | em-desenvolvimento | 07/09/2026 | — |
@@ -65,7 +65,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | `scheduler.py`: hora fixa (RF01) | Renato | pendente | 14/09/2026 | Fase 1 |
 | `scheduler.py`: recorrência com janela (RF02) | Renato | pendente | 22/09/2026 | RF01 |
 | `tray.py`: menu e lembretes ativos (RF03) | Renato | pendente | 22/09/2026 | Fase 1 |
-| `cli.py`: comandos do MVP (RF06) | Felipe | pendente | 22/09/2026 | `storage.py`, plano de comandos |
+| `cli.py`: comandos do MVP (RF06) | Felipe | pronto | 22/09/2026 | `storage.py`, plano de comandos |
 | `cli.py`: `start` e `stop` | Renato | pendente | 22/09/2026 | `app.py` |
 | `notifications.py`: afinação da notificação em Windows | Niley | pendente | 22/09/2026 | Fase 1 |
 | Ponto de integração 2 em `develop` — MVP fechado | Todos | pendente | 22/09/2026 | todos os módulos |
