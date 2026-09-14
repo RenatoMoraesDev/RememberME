@@ -6,6 +6,7 @@ Modelo de threads (verificado no spike):
     thread do agendador -> dispara lembretes e a vigia da paragem
 
 """
+
 import subprocess
 import sys
 
@@ -61,6 +62,7 @@ def arrancar() -> None:
 
     tray.arrancar(ao_sair=encerrar)  # bloqueia aqui
 
+
 def arrancar_em_segundo_plano() -> None:
     """Lança arrancar() num processo à parte, desligado do terminal."""
     if sys.platform == "win32":
@@ -68,21 +70,30 @@ def arrancar_em_segundo_plano() -> None:
     else:
         _arrancar_posix()
 
+
 def _arrancar_windows() -> None:
     """Arranca o programa em Windows."""
     subprocess.Popen(
-    [sys.executable, "-m", "rememberme", "start"],
-    creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
-    close_fds=True,
+        [sys.executable, "-m", "rememberme", "start"],
+        creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        close_fds=True,
     )
+
 
 def _arrancar_posix() -> None:
     """Arranca o programa em Linux e MacOS."""
     subprocess.Popen(
         [sys.executable, "-m", "rememberme", "start"],
         start_new_session=True,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
         close_fds=True,
     )
+
 
 def pedir_paragem() -> None:
     """O `rememberme stop`. Corre noutro processo: so' escreve o pedido."""
