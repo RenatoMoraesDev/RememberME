@@ -150,7 +150,7 @@ def listar():
 
 @app.command()
 def remove(id: int):
-    """Apaga um lembrete (RF06)."""
+    """Apaga um lembrete."""
     apagou = storage.apagar(id)
     if apagou:
         typer.echo(f"Lembrete {id} removido.")
@@ -189,7 +189,7 @@ def edit(
         help="Dias: --dias seg,qua,sex",
     ),
 ):
-    """Altera um lembrete existente (RF06)."""
+    """Altera um lembrete existente."""
     lembrete = storage.obter(id)
     if lembrete is None:
         typer.echo(f"Lembrete {id} não encontrado.")
