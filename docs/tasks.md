@@ -38,7 +38,6 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
 
 | Estudo do `Typer`: comando que escreve na base de dados | Felipe | pronto | 07/09/2026 | — |
-| Estudo do `Typer`: comando que escreve na base de dados | Felipe | prontoo | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
 | Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
 | Plano de comandos do CLI (casos de uso) | Renato | em-desenvolvimento | 07/09/2026 | — |
