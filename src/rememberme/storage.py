@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS lembrete (
     janela_fim    TEXT,
     intervalo_min INTEGER,
     dias_semana   TEXT    NOT NULL,
-    ativo         INTEGER NOT NULL DEFAULT 1
+    ativo         INTEGER NOT NULL DEFAULT 1,
+    accao         TEXT    NOT NULL DEFAULT 'notificacao',
+    accao         TEXT
 );
 
 CREATE TABLE IF NOT EXISTS estado (
@@ -33,6 +35,7 @@ CREATE TABLE IF NOT EXISTS estado (
 CAMPOS = (
     "id", "texto", "hora", "janela_inicio", "janela_fim",
     "intervalo_min", "dias_semana", "ativo",
+    "accao", "accao_param",
 )
 
 
@@ -60,6 +63,10 @@ def _para_lembrete(linha: sqlite3.Row) -> Lembrete:
         intervalo_min=linha["intervalo_min"],
         dias_semana=linha["dias_semana"],
         ativo=bool(linha["ativo"]),
+
+        #RF07 - novos Campos
+        accao=linha["accao"],
+        accao_param= linha["accao_param"],
     )
 
 
