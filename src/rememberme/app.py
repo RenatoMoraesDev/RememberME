@@ -4,7 +4,10 @@ Modelo de threads (verificado no spike):
 
     thread principal    -> tray.arrancar()   bloqueia ate' encerrar
     thread do agendador -> dispara lembretes e a vigia da paragem
+
 """
+import subprocess
+import sys
 
 from rememberme import notifications, scheduler, storage, tray
 from rememberme.models import Lembrete
@@ -58,6 +61,28 @@ def arrancar() -> None:
 
     tray.arrancar(ao_sair=encerrar)  # bloqueia aqui
 
+def arrancar_em_segundo_plano() -> None:
+    """Lança arrancar() num processo à parte, desligado do terminal."""
+    if sys.platform == "win32":
+        _arrancar_windows()
+    else:
+        _arrancar_posix()
+
+def _arrancar_windows() -> None:
+    """Arranca o programa em Windows."""
+    subprocess.Popen(
+    [sys.executable, "-m", "rememberme", "start"],
+    creationflags=subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP,
+    close_fds=True,
+    )
+
+def _arrancar_posix() -> None:
+    """Arranca o programa em Linux e MacOS."""
+    subprocess.Popen(
+        [sys.executable, "-m", "rememberme", "start"],
+        start_new_session=True,
+        close_fds=True,
+    )
 
 def pedir_paragem() -> None:
     """O `rememberme stop`. Corre noutro processo: so' escreve o pedido."""
