@@ -36,6 +36,8 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 |---|---|---|---|---|
 | Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | Pronto | 07/09/2026 | contrato da função |
 | Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
+
+| Estudo do `Typer`: comando que escreve na base de dados | Felipe | pronto | 07/09/2026 | — |
 | Estudo do `Typer`: comando que escreve na base de dados | Felipe | prontoo | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
 | Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
@@ -75,7 +77,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
 | Testes de `storage.py` e `scheduler.py` | Renato | pendente | 24/09/2026 | MVP estável |
-| Testes de `cli.py` | Felipe | pendente | 24/09/2026 | MVP estável |
+| Testes de `cli.py` | Felipe | pronto | 24/09/2026 | MVP estável |
 | Testes de `notifications.py` | Niley | pendente | 24/09/2026 | MVP estável |
 | Empacotamento com PyInstaller | Felipe | pendente | 24/09/2026 | MVP estável |
 | RF07: som, pop-up, abrir aplicação/URL | Niley | pendente | 28/09/2026 | MVP estável |
