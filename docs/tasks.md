@@ -68,7 +68,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | `tray.py`: menu e lembretes ativos (RF03) | Renato | pendente | 22/09/2026 | Fase 1 |
 | `cli.py`: comandos do MVP (RF06) | Felipe | pronto | 22/09/2026 | `storage.py`, plano de comandos |
 | `cli.py`: `start` e `stop` | Renato | pendente | 22/09/2026 | `app.py` |
-| `notifications.py`: afinação da notificação em Windows | Niley | pendente | 22/09/2026 | Fase 1 |
+| `notifications.py`: afinação da notificação em Windows | Felipe | implementado e testado | 21/09/2026 | Fase 1 |
 | Ponto de integração 2 em `develop` — MVP fechado | Todos | pendente | 22/09/2026 | todos os módulos |
 
 ## Fase 3 — Validação e incrementais
