@@ -142,10 +142,8 @@ Merge direto em `develop`, nos pontos de integração agendados. `develop` → `
 
 ## Contribuidores
 
-| Nome | GitHub | Responsabilidades |
+| Nome | GitHub |
 |---|---|---|
-| Felipe Ribeiro | [@felipe-g-ribeiro](https://github.com/felipe-g-ribeiro) | Linha de comandos, empacotamento, documentação de utilização |
-| Niley Barros | [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) | Notificações, ações do utilizador, registo de decisões |
-| Renato Moraes | [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) | Coordenação, integração, persistência e agendamento |
-
-Os papéis alternam ao longo das etapas e a revisão de código é cruzada.
+| Felipe Ribeiro | [@felipe-g-ribeiro](https://github.com/felipe-g-ribeiro) |
+| Niley Barros | [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) |
+| Renato Moraes | [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) |
