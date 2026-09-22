@@ -21,24 +21,25 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Organização inicial do repositório | Renato | pronto | 02/09/2026 | — |
-| Reorganizar a documentação por etapa | Renato | em-desenvolvimento | 03/09/2026 | — |
+| Organização inicial do repositório | Renato | pronto | 13/09/2026 | — |
+| Reorganizar a documentação por etapa | Renato | pronto | 03/09/2026 | — |
 | Plano de desenvolvimento (item 7) | Renato | em-desenvolvimento | 03/09/2026 | — |
-| Nomenclatura de branches no README | Renato | pendente | 03/09/2026 | — |
+| Nomenclatura de branches no README | Renato |pronto | 03/09/2026 | — |
 
 | Criar o milestone M1 no GitHub | Renato | pendente | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
-| Entrega da Etapa 2 | Todos | pendente | 04/09/2026 | itens acima |
+| Entrega da Etapa 2 | Todos | Pronto | 04/09/2026 | itens acima |
 
 ## Fase 0 — Capacitação
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | em-desenvolvimento | 07/09/2026 | contrato da função |
-| Estudo do `pystray`: ícone com menu "Sair" | Renato | em-desenvolvimento | 07/09/2026 | — |
-| Estudo do `Typer`: comando que escreve na base de dados | Felipe | em-desenvolvimento | 07/09/2026 | — |
+| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | Pronto | 07/09/2026 | contrato da função |
+| Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
+
+| Estudo do `Typer`: comando que escreve na base de dados | Felipe | pronto | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
-| Reunião: validar a escolha do agendador | Todos | pendente | 04/09/2026 | comparação e spikes |
+| Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
 | Plano de comandos do CLI (casos de uso) | Renato | em-desenvolvimento | 07/09/2026 | — |
 | Validar o plano de comandos com o grupo | Todos | pendente | 09/09/2026 | plano de comandos |
 
@@ -65,9 +66,9 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | `scheduler.py`: hora fixa (RF01) | Renato | pendente | 14/09/2026 | Fase 1 |
 | `scheduler.py`: recorrência com janela (RF02) | Renato | pendente | 22/09/2026 | RF01 |
 | `tray.py`: menu e lembretes ativos (RF03) | Renato | pendente | 22/09/2026 | Fase 1 |
-| `cli.py`: comandos do MVP (RF06) | Felipe | pendente | 22/09/2026 | `storage.py`, plano de comandos |
+| `cli.py`: comandos do MVP (RF06) | Felipe | pronto | 22/09/2026 | `storage.py`, plano de comandos |
 | `cli.py`: `start` e `stop` | Renato | pendente | 22/09/2026 | `app.py` |
-| `notifications.py`: afinação da notificação em Windows | Niley | pendente | 22/09/2026 | Fase 1 |
+| `notifications.py`: afinação da notificação em Windows | Felipe | implementado e testado | 21/09/2026 | Fase 1 |
 | Ponto de integração 2 em `develop` — MVP fechado | Todos | pendente | 22/09/2026 | todos os módulos |
 
 ## Fase 3 — Validação e incrementais
@@ -75,7 +76,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
 | Testes de `storage.py` e `scheduler.py` | Renato | pendente | 24/09/2026 | MVP estável |
-| Testes de `cli.py` | Felipe | pendente | 24/09/2026 | MVP estável |
+| Testes de `cli.py` | Felipe | pronto | 24/09/2026 | MVP estável |
 | Testes de `notifications.py` | Niley | pendente | 24/09/2026 | MVP estável |
 | Empacotamento com PyInstaller | Felipe | pendente | 24/09/2026 | MVP estável |
 | RF07: som, pop-up, abrir aplicação/URL | Niley | pendente | 28/09/2026 | MVP estável |

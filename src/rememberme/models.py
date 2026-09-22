@@ -33,6 +33,8 @@ class Lembrete:
     dias_semana: str = ",".join(DIAS)
     ativo: bool = True
     id: Optional[int] = None  # None enquanto nao foi gravado
+    accao: str ="notificacao"
+    accao_param: Optional[str] =None
 
     @property
     def e_hora_fixa(self) -> bool:

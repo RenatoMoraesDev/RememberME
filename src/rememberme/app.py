@@ -4,7 +4,11 @@ Modelo de threads (verificado no spike):
 
     thread principal    -> tray.arrancar()   bloqueia ate' encerrar
     thread do agendador -> dispara lembretes e a vigia da paragem
+
 """
+
+import subprocess
+import sys
 
 from rememberme import notifications, scheduler, storage, tray
 from rememberme.models import Lembrete
@@ -18,7 +22,23 @@ INTERVALO_VIGIA = 5
 
 def ao_disparar(lembrete: Lembrete) -> None:
     """Chamada pelo agendador quando chega a hora de um lembrete."""
-    notifications.notificar(lembrete.texto)
+    if lembrete.accao == "abrir":
+        #abrir URL ou app
+        import webbrowser
+        webbrowser.open(lembrete.accao_param)
+
+    elif lembrete.accao =="som":
+        #tocar som
+        import winsound
+        winsound.PlaySound(lembrete.accao_param, winsound.SND_FILENAME)
+
+    elif lembrete.accao == "popup":
+        #mostra popup
+        from tkinter import messagebox
+        messagebox.showinfo("lembrete", lembrete.accao_param or lembrete.texto)
+
+    else:
+        notifications.notificar(lembrete.texto)
 
 
 def vigiar_paragem() -> None:
@@ -54,10 +74,41 @@ def arrancar() -> None:
     for lembrete in storage.listar(apenas_ativos=True):
         scheduler.agendar(lembrete)
 
-    # TODO (Renato): pedir ao agendador que chame vigiar_paragem() de
-    # INTERVALO_VIGIA em INTERVALO_VIGIA segundos.
+    scheduler.agendar_intervalo(vigiar_paragem, INTERVALO_VIGIA)
 
     tray.arrancar(ao_sair=encerrar)  # bloqueia aqui
+
+
+def arrancar_em_segundo_plano() -> None:
+    """Lança arrancar() num processo à parte, desligado do terminal."""
+    if sys.platform == "win32":
+        _arrancar_windows()
+    else:
+        _arrancar_posix()
+
+
+def _arrancar_windows() -> None:
+    """Arranca o programa em Windows."""
+    subprocess.Popen(
+        [sys.executable, "-m", "rememberme", "start", "--debug"],
+        creationflags=subprocess.CREATE_NO_WINDOW,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        close_fds=True,
+    )
+
+
+def _arrancar_posix() -> None:
+    """Arranca o programa em Linux e MacOS."""
+    subprocess.Popen(
+        [sys.executable, "-m", "rememberme", "start", "--debug"],
+        start_new_session=True,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        close_fds=True,
+    )
 
 
 def pedir_paragem() -> None:
