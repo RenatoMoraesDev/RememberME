@@ -1,0 +1,460 @@
+[33mcommit af5e8395ba792488b637c5a83b0603d37ac9273b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c26d183 e9fed02
+Author: RenatoMoraesDev <8257525@formacao.iefp.pt>
+Date:   Tue Sep 22 13:31:19 2026 +0100
+
+    Merge pull request #9 from RenatoMoraesDev/develop
+    
+    docs: adicionar enunciados e entregável da Etapa 3
+
+[33mcommit e9fed02cb49457b6bcba802691932ba4f14d4e81[m[33m ([m[1;32mdevelop[m[33m)[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Tue Sep 22 13:25:10 2026 +0100
+
+    docs: atualizar README.MD para refletir a situação do projecto
+
+[33mcommit ef28a527a61d440b9587ae18623796d9bda7298a[m[33m ([m[1;33mtag: [m[1;33mv0.5[m[33m, [m[1;33mtag: [m[1;33metapa-3[m[33m, [m[1;32mdocs/renato-entregavel-etapa3[m[33m)[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Tue Sep 22 13:16:29 2026 +0100
+
+    docs: adicionar enunciados v3/v4 e entregável da Etapa 3
+
+[33mcommit c26d1834851f5df617d114da53236162daaafc7b[m
+Merge: d778d16 9ba8130
+Author: RenatoMoraesDev <8257525@formacao.iefp.pt>
+Date:   Tue Sep 22 11:56:35 2026 +0100
+
+    Merge pull request #8 from RenatoMoraesDev/develop
+    
+    Etapa 3: Empacotamento e arranque automático
+
+[33mcommit 9ba8130ac6e9a9b8899a29ddf3b8b4798bcd26f5[m
+Merge: 3450ef4 9646d0d
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 21 19:35:20 2026 +0100
+
+    Merge pull request #7 from RenatoMoraesDev/feat/teste-notificacao-som
+    
+    Implementação e teste da notificação e som; atualização da documentação
+
+[33mcommit 9646d0d4005890548034319972291c2f4c1ce18a[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 21 19:30:48 2026 +0100
+
+    Implementação e teste da notificação e som; atualização da documentação
+
+[33mcommit 3450ef46fd934f6665b28733afb55d38d09ec579[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 16:22:00 2026 +0100
+
+    chore: remover declaração duplicada de accao_param em Lembrete
+
+[33mcommit 79e6407b56ef62cc6e4e930fe153f688651801fe[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 16:03:33 2026 +0100
+
+    fix: corrigir coluna accao duplicada no esquema da base de dados (RF07)
+    
+    O CREATE TABLE tinha "accao" definida duas vezes em vez de "accao" e
+    "accao_param". Numa base de dados nova, o executescript falhava com
+    "duplicate column name: accao".
+
+[33mcommit 08e8fef4c23806f52c5e0881503a8e4376679fba[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 15:50:43 2026 +0100
+
+    chore: remover ficheiro eq criado por engano
+
+[33mcommit b764f766ed383b4745c8540ac3f8bffc80bb6d26[m
+Merge: 00bc2ec 37907be
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 15:44:35 2026 +0100
+
+    Merge branch 'feat/renato-start-segundo-plano' into develop
+
+[33mcommit 37907be3598f1b8391d96b7be1f6e1fe32a732d5[m[33m ([m[1;31morigin/feat/renato-start-segundo-plano[m[33m, [m[1;32mfeat/renato-start-segundo-plano[m[33m)[m
+Merge: 2ee3260 1ca22db
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 15:07:58 2026 +0100
+
+    Merge branch 'feat/renato-start-segundo-plano' of https://github.com/RenatoMoraesDev/RememberME into feat/renato-start-segundo-plano
+
+[33mcommit 2ee3260d9f1c36f8378272a6895c3e486748bca1[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 11:05:05 2026 +0100
+
+    fix: polimento das mensagens de remove e edit
+
+[33mcommit 00bc2ec453115efa55317447617de5b183cdc112[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Mon Sep 14 11:03:46 2026 +0100
+
+    RF07: implementar lógica das ações no ao_disparar()
+
+[33mcommit 997b7b9453ff474ad38be18d6a349df32635e38a[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Mon Sep 14 10:22:45 2026 +0100
+
+    RF07: adicionar campos accao e accao_param na base de dados
+
+[33mcommit 351c11886893e2691df88b82dc966cea91e9b61b[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Mon Sep 14 10:07:56 2026 +0100
+
+    adicionar campos accao e accao_param ao modelo Lembrete
+
+[33mcommit 1ca22db17a35bc0f970bd7cb244fb4f9a4eb69dd[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 11:05:05 2026 +0100
+
+    fix: polimento das mensagens de remove e edit
+
+[33mcommit 4f3e601566dde55f700d8b9721842f7f035d903a[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 10:37:09 2026 +0100
+
+    fix: evitar criação de terminais
+
+[33mcommit 647632c0c37bd08cd53553680884a4fb6d28f399[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 10:31:17 2026 +0100
+
+    feat: flag --debug no start; segundo plano passa a ser o padrao
+
+[33mcommit 8c759264787c6505e6d974e2291f412bbd099d7d[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 14 10:18:25 2026 +0100
+
+    feat: adicionar arrancar_em_segundo_plano() multiplataforma em app.py
+
+[33mcommit ddbe3efb764f2a50d9220eec3947722f95edb5ca[m[33m ([m[1;33mtag: [m[1;33mv0.1[m[33m)[m
+Merge: a70d89d 23d6d8c
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 09:39:04 2026 +0100
+
+    Merge pull request #5 from RenatoMoraesDev/feat/felipe-rf08
+    
+    build: preparar arranque automatico no Windows
+
+[33mcommit 23d6d8ce4c175605b792971741a6b022e7a1a4be[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 09:30:57 2026 +0100
+
+    build: preparar arranque automatico no Windows
+
+[33mcommit a70d89d578a625a27a03b85b8af20ee1855e2454[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:53:39 2026 +0100
+
+    docs: remover tarefa duplicada do Typer
+
+[33mcommit 2eccc6f3481102ebfd4372a4fc5ccac8314aaf08[m
+Merge: 444e7d4 67f4c18
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:44:20 2026 +0100
+
+    Merge pull request #3 from RenatoMoraesDev/test/felipe-cli
+    
+    docs: concluir testes da cli
+
+[33mcommit 67f4c187c8ab04dcecf0191c3fd02b8991f4d5b5[m
+Merge: 7833a73 444e7d4
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:39:37 2026 +0100
+
+    Merge branch 'develop' into test/felipe-cli
+
+[33mcommit 444e7d4a1e0319f760497bea7eaa70989303de4f[m
+Merge: 5faf225 38b17dc
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:31:54 2026 +0100
+
+    Merge pull request #2 from RenatoMoraesDev/docs/felipe-atualizar-tasks
+    
+    docs: atualizar estado das tarefas
+
+[33mcommit 7833a7329596ee4b61e1070eb18aa23578bb1a2c[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:21:02 2026 +0100
+
+    docs: concluir testes da cli
+
+[33mcommit 38b17dc3358605b673b4141794110f73c334b5bb[m[33m ([m[1;31morigin/docs/felipe-atualizar-tasks[m[33m)[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 14 08:06:33 2026 +0100
+
+    docs: atualizar estado das tarefas
+
+[33mcommit 5faf2253299ad2ff90ffe6c18c456b1f14674769[m
+Merge: 9b5dc21 8f7ab99
+Author: Niley <barrosniley6@gmail.com>
+Date:   Sun Sep 13 13:54:30 2026 +0100
+
+    merge: integrar notificações na develop
+
+[33mcommit 8f7ab995f14e2761275032b1c99fc39c7ba9c7ce[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Sun Sep 13 13:33:59 2026 +0100
+
+    atualizar estado das tarefas da Fase 0 — Capacitação
+
+[33mcommit f17bfb938a89d7e45f6d2a539b967bed82dd73b8[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Sun Sep 13 13:28:00 2026 +0100
+
+    docs: concluir entrega da Etapa 2
+
+[33mcommit b4bd42064593e1133789fd8f476e652ef590571a[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Sun Sep 13 13:13:06 2026 +0100
+
+    docs: nomenclatura de branches concluída
+
+[33mcommit 3fe092eedda0ae70e6a9ca5e2e94424bcbce1979[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Fri Sep 11 13:34:36 2026 +0100
+
+    docs: atualizar estado da tarefa 'Reorganizar documentação por etapa' para pronto
+
+[33mcommit 9b5dc218b0de98381d742e3b516bbaac8dc8a6e6[m
+Merge: 9dc4c98 013291f
+Author: Niley <barrosniley6@gmail.com>
+Date:   Thu Sep 10 07:10:03 2026 +0100
+
+    resolver conflito
+
+[33mcommit 9dc4c9826c4958043a5df50993ab2e15bd1e6a83[m
+Merge: 9fbde2d da9257a
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Wed Sep 9 13:09:04 2026 +0100
+
+    merge: comandos on e off
+
+[33mcommit da9257a15f4c199e098ff206e7f856942090a7f2[m[33m ([m[1;31morigin/feat/felipe-cli-on-off[m[33m)[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Wed Sep 9 13:06:10 2026 +0100
+
+    feat: implementa comandos on e off
+
+[33mcommit 9fbde2d955ee7286a87f8d18b342775125d43de4[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Wed Sep 9 12:06:31 2026 +0100
+
+    fix: remover exceção a pedido do formador
+
+[33mcommit 83a185f399e9761546ec583e837ebdce2b4d6227[m
+Merge: 39fcb2e b93e21c
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 13:57:00 2026 +0100
+
+    Merge branch 'feat/renato-criar-bandeja' into develop
+
+[33mcommit 39fcb2e8de64572e31aa398113ef5be088259510[m
+Merge: 33bc92a 7c45531
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 13:56:08 2026 +0100
+
+    Merge branch 'develop' of https://github.com/RenatoMoraesDev/RememberME into develop
+
+[33mcommit b93e21c10467c081411c2e0aeb72631d93595b7f[m[33m ([m[1;31morigin/feat/renato-criar-bandeja[m[33m)[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 12:46:36 2026 +0100
+
+    feat: ligar app.py ao scheduler.py e ao tray.py
+
+[33mcommit 01149414e2d43e8524ed3e99d4d58a2f0362d56f[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 11:51:12 2026 +0100
+
+    feat: incluir bandeja simples
+
+[33mcommit 013291ff20b6dc8edeb74c751ae2a85591b5bea3[m
+Author: Niley <barrosniley6@gmail.com>
+Date:   Mon Sep 7 11:18:43 2026 +0100
+
+    Niley: implementar nutificacao
+
+[33mcommit 33bc92acb5065d8c8c0f5324d9df352f5f13370f[m[33m ([m[1;31morigin/feat/renato-criar-agendador[m[33m)[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 10:18:11 2026 +0100
+
+    fix: criar variavel global ao invés de local _ao_disparar
+
+[33mcommit e84780d4e3608b5e02fea663c0480e8fb9ea8d76[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 10:14:51 2026 +0100
+
+    feat: incluir dias da semana no agendador
+
+[33mcommit 547196fb4fa376e899e66a338b2f53bb00031d2a[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 10:11:56 2026 +0100
+
+    feat: remover lembrete do agendador
+
+[33mcommit 7c45531744e74a6d2abc2788faf19576c8876499[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 7 10:08:25 2026 +0100
+
+    fix: remove funcao remove duplicada
+
+[33mcommit 79adae22fc3dbfedfc706098048a23a740bd61f7[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 10:02:29 2026 +0100
+
+    feat: adicionar opção de janela recorrente ao agendador
+
+[33mcommit c028e33907eb448a2fe5105c2d8c4f1d452acaba[m
+Merge: 3fd9d86 2e961db
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 7 10:01:50 2026 +0100
+
+    merge: adiciona comando edit
+
+[33mcommit 2e961db698864ccc18335d597bde426a08c5323a[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 7 10:00:55 2026 +0100
+
+    feat: implementa comando edit
+
+[33mcommit e0a2d2c7089cca93a7f80932927665f7e55966a7[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 09:52:08 2026 +0100
+
+    feat: adicionar opção de hora fixa ao agendador
+
+[33mcommit cf2e90cc71a73ac63f972a30a02b2198d913d059[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Mon Sep 7 09:45:36 2026 +0100
+
+    feat: adicionar iniciar e para ao agendador
+
+[33mcommit 3fd9d86ff8df3ab10a47c0ce2bcb013a1bd98a5b[m[33m ([m[1;31morigin/feat/felipe-cli-remove[m[33m)[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 7 09:29:13 2026 +0100
+
+    feat: adicionar comando remove na CLI
+
+[33mcommit 8570ae0f2921e648de5810dbfafccad57c02f92a[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Mon Sep 7 08:44:26 2026 +0100
+
+    feat: implementar comando list da CLI
+
+[33mcommit e791de2d7480954b648e59c116caff8409a4e6d8[m[33m ([m[1;31morigin/feat/felipe-cli-comando-add[m[33m)[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Sun Sep 6 11:32:47 2026 +0100
+
+    feat: implementar comando add da CLI
+
+[33mcommit d778d1699a19867354259efcc570113ab85ccfdf[m
+Merge: 1fb0252 94c4863
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Fri Sep 4 10:49:03 2026 +0100
+
+    Merge pull request #1 from RenatoMoraesDev/develop
+    
+    Etapa 2: plano de desenvolvimento e esqueleto
+
+[33mcommit 94c48639ff2d4365bbf36e009750a41969d19973[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Fri Sep 4 09:51:12 2026 +0100
+
+    Atualização Task remoção branch felipe/feature
+
+[33mcommit 71843f8ad8441a60a958d7ac865b5e5d3eba7be7[m[33m ([m[1;31morigin/chore/felipe-pyproject-fix[m[33m)[m
+Author: Felipe Ribeiro <7634275@formacao.iefp.pt>
+Date:   Fri Sep 4 09:16:19 2026 +0100
+
+    chore: Acresentar script no pyproject
+
+[33mcommit dbb6f4dd91e792d6953843707a80b4c76b751053[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 23:06:54 2026 +0100
+
+    docs: remover paragrafo orfao sobre revisao cruzada no plano de desenvolvimento
+
+[33mcommit 5cd811f0c06c8d92da631b65be7edf8429aa6621[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 23:00:55 2026 +0100
+
+    feat: adicionar esqueleto dos sete modulos em src/rememberme
+
+[33mcommit 34b47de51ea40c965e862c6afeb39089583ba4f1[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:57:00 2026 +0100
+
+    docs: corrigir fluxo Git no README (merge direto em develop, PR só para master)
+
+[33mcommit aa040b4f208c2d366db473900a835287155d9f86[m
+Merge: add1d5d e67c47e
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:49:30 2026 +0100
+
+    Merge branch 'docs/renato-reorganizacao' into develop
+
+[33mcommit e67c47ebb9c8d3a10592c4e8c8d3747de55f6dd3[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:48:28 2026 +0100
+
+    docs: atualizar plano de desenvolvimento para a arquitetura e fluxo Git atuais
+
+[33mcommit add1d5da6588b9f0a0866f09ed1e4da6360fb5da[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:21:14 2026 +0100
+
+    chore: adicionar dependencias do MVP
+
+[33mcommit 1194402daad4f5366b5859adad1b98bc572ecf51[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:16:12 2026 +0100
+
+    chore: adicionar pyproject.toml com build-backend uv
+
+[33mcommit 0d56b6f9ff109ad3f7de7dcdf3c95632b817eb65[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 21:04:34 2026 +0100
+
+    refactor: renomear o pacote para rememberme
+
+[33mcommit 6fc54a01af6828f69513b151c0452fde1fa87c08[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 20:54:15 2026 +0100
+
+    chore: ignorar ficheiros derivados e ambiente virtual
+
+[33mcommit 30128727f793a03b39dd6faafa808e4ac1ce492c[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 20:49:54 2026 +0100
+
+    docs: apagar resíduo da reorganização
+
+[33mcommit 0e93a25f40871462dc1d3e13051c198c99ea6445[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Sep 3 20:30:35 2026 +0100
+
+    docs: reorganizar e complementar a documentação inicial
+
+[33mcommit 1fb025258405d61c73f402506f87b43279481497[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Wed Sep 2 13:59:33 2026 +0100
+
+    Etapa 2: Ajustes dos entregáveis
+
+[33mcommit 3023a6b523b53075ab62ca9aeeaafd5ed966ebf9[m[33m ([m[1;31morigin/felipe/feature[m[33m)[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Wed Sep 2 13:40:14 2026 +0100
+
+    Etapa 2: Incluindo pdf da etapa
+
+[33mcommit 2df8579d3e8383f197883c12874b56b7f3c9df5c[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Wed Sep 2 13:34:02 2026 +0100
+
+    Etapa 2: Organização inicial do projeto, definição de tecnologias
+
+[33mcommit a824f8988a532c0dc77c7e94a777db9dc823ac65[m
+Author: Renato Moraes <hexemeister@gmail.com>
+Date:   Thu Jul 30 12:05:38 2026 +0100
+
+    Etapa 1: análise de requisitos

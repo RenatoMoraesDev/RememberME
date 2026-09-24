@@ -13,7 +13,7 @@ reformular um título. O título completo de cada etapa está no `README.md` da 
 | 1 — Definição do Problema e Análise de Requisitos | Análise | [`etapa-1-analise/`](etapa-1-analise/) | Entregue |
 | 2 — Arquitetura, Tecnologias e Planeamento | Projeto | [`etapa-2-projeto/`](etapa-2-projeto/) | Entrega a 04/09/2026 |
 | 3 — Desenvolvimento Colaborativo e Controlo de Versões | Implementação | [`etapa-3-desenvolvimento/`](etapa-3-desenvolvimento/) | Por abrir |
-| 4 — Validação, Testes e Demonstração | Verificação e validação | `etapa-4-validacao/` | Por abrir |
+| 4 — Validação, Testes e Demonstração | Verificação e validação | [`etapa-4-testes/`](etapa-4-testes/) | Estrutura criada — testes por preencher |
 | 5 — Entrega Final e Apresentação | Entrega | `etapa-5-entrega/` | Por abrir |
 
 As pastas das etapas 3 a 5 são criadas quando cada etapa arrancar, com o enunciado respetivo em mãos.
