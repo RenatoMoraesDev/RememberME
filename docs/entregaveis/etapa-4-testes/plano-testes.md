@@ -15,7 +15,7 @@ nome em [`videos/README.md`](videos/README.md)).
 |---|---|---|---|---|---|---|
 | T01 | Aplicação instalada, base de dados vazia | `rememberme add "Beber água" --as 08:30` | Lembrete gravado; `rememberme list` mostra tipo `hora`, agenda `08:30` |Lembrete criado com sucesso e verificado na lista |Passou |[T01.mp4](videos/T01.mp4)|
 | T02 | — | `rememberme add "Sem horário"` (sem `--as` nem `--entre`) | Erro: "indique --as ou --entre" | Erro : indique --as ou --entre|Passou| [T02.mp4](videos/T02.mp4)|
-| T03 | — | `rememberme add "Hora inválida" --as 25:99` | Erro de formato: "'25:99' nao e' uma hora no formato HH:MM" | | | |
+| T03 | Aplicação instalada | `rememberme add "Hora inválida" --as 25:99` | Erro de formato: "'25:99' nao e' uma hora no formato HH:MM" |  Invalid value for '--as': '25:00' nao e' uma hora no formato HH:MM |Passou | [T03.mp4](videos/T03.mp4)|
 | T04 | Lembrete T01 criado, aplicação a correr (`rememberme start --debug`) | Aguardar a hora configurada | Notificação de sistema aparece com o texto do lembrete | | | |
 
 ## RF02 — Lembrete recorrente numa janela
