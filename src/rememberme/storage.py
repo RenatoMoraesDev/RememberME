@@ -23,11 +23,7 @@ CREATE TABLE IF NOT EXISTS lembrete (
     dias_semana   TEXT    NOT NULL,
     ativo         INTEGER NOT NULL DEFAULT 1,
     accao         TEXT    NOT NULL DEFAULT 'notificacao',
-<<<<<<< HEAD
-    accao         TEXT
-=======
-    accao_param TEXT
->>>>>>> develop
+    accao_param   TEXT
 );
 
 CREATE TABLE IF NOT EXISTS estado (
