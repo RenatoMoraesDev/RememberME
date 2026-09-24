@@ -11,14 +11,12 @@ Item 3 do entregável da Etapa 4.
 | RF03 | Ícone na bandeja com menu básico ("Sair") | `tray.py` |
 | RF04 | Persistência local em SQLite, sem rede | `storage.py` |
 | RF06 | Adicionar, editar, remover lembretes via CLI | `cli.py` (`add`, `edit`, `remove`, `on`, `off`, `list`) |
-
+|RF08|Arranque automático com o sistema operativo|`rememberme start`|
 ## Funcionalidades não implementadas
 
 - **RF05 — Tarefas administrativas pré-cadastradas.** Não há dados nem
   comando de seed; a base de dados começa vazia.
-- **RF08 — Arranque automático com o sistema operativo.** Não há registo no
-  arranque do Windows (nem equivalente noutro SO); a aplicação só corre se
-  for iniciada manualmente com `rememberme start`.
+
 - **RF09 — Execução de comando arbitrário como ação de um lembrete.** Não
   implementado; `app.py` só suporta as ações fixas `abrir`, `som`, `popup`
   e `notificacao` (RF07). Sem RF09, o RNF05 (confirmação e log ao executar
