@@ -51,7 +51,7 @@ class JanelaPrincipal(tk.Tk):
         self.campo_hora = ttk.Entry(moldura, width=10)
         self.campo_hora.grid(row=1, column=1, sticky="w", padx=5)
 
-        ttk.Label(moldura, text="ou janela: inicio").grid(row=2, column=0, sticky="w")
+        ttk.Label(moldura, text="Entre: inicio").grid(row=2, column=0, sticky="w")
         self.campo_janela_inicio = ttk.Entry(moldura, width=10)
         self.campo_janela_inicio.grid(row=2, column=1, sticky="w", padx=5)
 
@@ -66,7 +66,7 @@ class JanelaPrincipal(tk.Tk):
         ttk.Label(moldura, text="Tipo de aviso:").grid(row=4, column=0, sticky="w")
         self.campo_accao = ttk.Combobox(
             moldura,
-            values=["Notificacao (discreta)", "Popup (janela visivel)"],
+            values=["Popup (janela visivel)"],
             state="readonly",
             width=25,
         )
@@ -74,7 +74,7 @@ class JanelaPrincipal(tk.Tk):
         self.campo_accao.grid(row=4, column=1, columnspan=2, sticky="w", padx=5)
 
         self.botao_guardar = ttk.Button(moldura, text="Adicionar", command=self.guardar)
-        self.botao_guardar.grid(row=5, column=0, columnspan=3, pady=8, sticky="we")
+        self.botao_guardar.grid(row=5, column=0, columnspan=13, pady=8, sticky="we")
         self.botao_cancelar = ttk.Button(
             moldura, text="Cancelar edicao", command=self.cancelar_edicao
         )
