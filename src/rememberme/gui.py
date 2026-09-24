@@ -5,11 +5,22 @@ ativar/desativar e apagar lembretes, usando o mesmo `storage`.
 """
 
 import tkinter as tk
+import ctypes
 from tkinter import messagebox, ttk
 
 from rememberme import app as aplicacao
 from rememberme import storage
 from rememberme.models import DIAS, Lembrete
+
+
+_mutex = None
+
+
+def _gui_ja_aberta() -> bool:
+    global _mutex
+
+    _mutex = ctypes.windll.kernel32.CreateMutexW(None, False, "RememberME-GUI")
+    return ctypes.windll.kernel32.GetLastError() == 183
 
 
 class JanelaPrincipal(tk.Tk):
@@ -261,6 +272,8 @@ class JanelaPrincipal(tk.Tk):
 
 def arrancar() -> None:
     """Ponto de entrada da GUI."""
+    if _gui_ja_aberta():
+        return
     JanelaPrincipal().mainloop()
 
 
