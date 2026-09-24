@@ -78,10 +78,12 @@ def criar(lembrete: Lembrete) -> Lembrete:
     with con:
         cur = con.execute(
             "INSERT INTO lembrete (texto, hora, janela_inicio, janela_fim,"
-            " intervalo_min, dias_semana, ativo) VALUES (?,?,?,?,?,?,?)",
+            " intervalo_min, dias_semana, ativo, accao, accao_param)"
+            " VALUES (?,?,?,?,?,?,?,?,?)",
             (lembrete.texto, lembrete.hora, lembrete.janela_inicio,
              lembrete.janela_fim, lembrete.intervalo_min,
-             lembrete.dias_semana, int(lembrete.ativo)),
+             lembrete.dias_semana, int(lembrete.ativo),
+             lembrete.accao, lembrete.accao_param),
         )
     lembrete.id = cur.lastrowid
     return lembrete
@@ -104,10 +106,11 @@ def atualizar(lembrete: Lembrete) -> None:
     with con:
         con.execute(
             "UPDATE lembrete SET texto=?, hora=?, janela_inicio=?, janela_fim=?,"
-            " intervalo_min=?, dias_semana=?, ativo=? WHERE id=?",
+            " intervalo_min=?, dias_semana=?, ativo=?, accao=?, accao_param=? WHERE id=?",
             (lembrete.texto, lembrete.hora, lembrete.janela_inicio,
              lembrete.janela_fim, lembrete.intervalo_min,
-             lembrete.dias_semana, int(lembrete.ativo), lembrete.id),
+             lembrete.dias_semana, int(lembrete.ativo),
+             lembrete.accao, lembrete.accao_param, lembrete.id),
         )
 
 
