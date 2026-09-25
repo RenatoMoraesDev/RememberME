@@ -21,7 +21,7 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 
 | Teste | Pré-condições | Passos | Resultado esperado | Resultado obtido | Estado | Vídeo |
 |---|---|---|---|---|---|---|
-| T05 | Base de dados vazia | `rememberme add "Levantar" --entre 08:00-14:00 --a-cada 60` | Lembrete gravado; `rememberme list` mostra tipo `janela`, agenda `08:00-14:00 (60 min)` | | | |
+| T05 | Base de dados vazia | `rememberme add "Levantar" --entre 08:00-14:00 --a-cada 60` | Lembrete gravado; `rememberme list` mostra tipo `janela`, agenda `08:00-14:00 (60 min)` | Lembrete gravado e exibido em `list` como tipo janela | Passou | [T05.mp4](videos/T05.mp4) |
 | T06 | — | `rememberme add "Sem intervalo" --entre 08:00-14:00` (sem `--a-cada`) | Erro: "--entre exige --a-cada" | | | |
 | T07 | — | `rememberme add "Intervalo sem janela" --as 08:00 --a-cada 30` | Erro: "--a-cada so pode ser usado com --entre" | | | |
 | T08 | — | `rememberme add "Janela malformada" --entre 08:00 --a-cada 30` | Erro: "--entre deve estar no formato HH:MM-HH:MM" | | | |
