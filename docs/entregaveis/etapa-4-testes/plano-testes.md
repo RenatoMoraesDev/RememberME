@@ -32,7 +32,7 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 | Teste | Pré-condições | Passos | Resultado esperado | Resultado obtido | Estado | Vídeo |
 |---|---|---|---|---|---|---|
 | T10 | Nenhum processo `rememberme` a correr | `rememberme start` | Ícone azul aparece na bandeja do sistema; comando devolve a consola | Ícone azul exibido na bandeja do sistema e consola devolvida com sucesso | Passou | [T10.mp4](videos/T10.mp4) |
-| T11 | Ícone visível (T10) | Clique direito → "Sair" | Ícone desaparece da bandeja; processo em segundo plano termina | | | |
+| T11 | Ícone visível (T10) | Clique direito → "Sair" | Ícone desaparece da bandeja; processo em segundo plano termina | Ícone removido da bandeja e processo em segundo plano encerrado com sucesso | Passou | [T11.mp4](videos/T11.mp4) |
 | T12 | Processo a correr em segundo plano | `rememberme stop` | Processo termina sem intervenção na bandeja; ícone desaparece | | | |
 
 > Nota: o menu da bandeja só tem "Sair" — a opção "ver lembretes ativos"
