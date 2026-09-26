@@ -57,4 +57,4 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 | T19 | Lembrete existente, ativo | `rememberme off 1` | "Lembrete 1 desativado."; `list` mostra `Ativo = nao` | Lembrete desativado com sucesso e confirmado estado inativo na listagem | Passou | [T19.mp4](videos/T19.mp4) |
 | T20 | Lembrete desativado (T19) | `rememberme on 1` | "Lembrete 1 ativado."; `list` mostra `Ativo = sim` | Lembrete reativado com sucesso e confirmado estado ativo na listagem | Passou | [T20.mp4](videos/T20.mp4) |
 | T21 | Lembrete existente | `rememberme remove 1` | "Lembrete 1 removido."; deixa de aparecer em `list` | Lembrete removido com sucesso e confirmada sua ausencia na listagem | Passou | [T21.mp4](videos/T21.mp4) |
-| T22 | — | `rememberme remove 999` (ID inexistente) | "Lembrete 999 nao existe." | | | |
+| T22 | — | `rememberme remove 999` | "Lembrete 999 nao existe." | Lembrete -- nao existe | Passou | [T22.mp4](videos/T22.mp4) |
