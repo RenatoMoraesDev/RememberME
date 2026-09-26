@@ -50,7 +50,7 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 
 | Teste | Pré-condições | Passos | Resultado esperado | Resultado obtido | Estado | Vídeo |
 |---|---|---|---|---|---|---|
-| T15 | Base de dados vazia | `rememberme list` | "Nenhum lembrete encontrado." | | | |
+| T15 | Base de dados vazia | `rememberme list` | "Nenhum lembrete encontrado." | Mensagem de ausencia de lembretes exibida corretamente | Passou | [T15.mp4](videos/T15.mp4) |
 | T16 | Lembrete T01 criado (ID conhecido) | `rememberme edit <id> --as 10:00` | "Lembrete <id> atualizado."; `list` mostra a nova hora | | | |
 | T17 | — | `rememberme edit 999 --as 10:00` (ID inexistente) | "Lembrete 999 não encontrado." | | | |
 | T18 | — | `rememberme edit <id>` sem nenhuma opção | Erro: "indique pelo menos uma alteracao: --texto, --as, --entre, --a-cada ou --dias" | | | |
