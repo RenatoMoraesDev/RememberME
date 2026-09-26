@@ -43,7 +43,7 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 
 | Teste | Pré-condições | Passos | Resultado esperado | Resultado obtido | Estado | Vídeo |
 |---|---|---|---|---|---|---|
-| T13 | Lembrete criado (T01) | `rememberme stop`, depois `rememberme start --debug` novamente | `rememberme list` continua a mostrar o lembrete; volta a disparar na hora certa | | | |
+| T13 | Lembrete criado (T01) | `rememberme stop`, depois `rememberme start --debug` novamente | `rememberme list` continua a mostrar o lembrete; volta a disparar na hora certa | Persistencia verificada com sucesso tras reiniciar o processo | Passou | [T13.mp4](videos/T13.mp4) |
 | T14 | — | Verificar a pasta de dados do utilizador (`rememberme.db`) | Ficheiro SQLite existe fora da pasta do repositório, sobrevive ao encerramento do processo | | | |
 
 ## RF06 — CRUD de lembretes via CLI
