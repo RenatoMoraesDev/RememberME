@@ -54,7 +54,7 @@ T04 |Ciar um Lembrete a correr (`rememberme start --debug`) | Aguardar a hora co
 | T16 | Lembrete T01 criado (ID conhecido) | `rememberme edit 1 --as 10:00` | "Lembrete 1 atualizado."; `list` mostra a nova hora | Lembrete atualizado com sucesso e alteracao de hora confirmada na listagem | Passou | [T16.mp4](videos/T16.mp4) |
 -- | T17 | — | `rememberme edit 999 --as 10:00` | "Lembrete 999 não encontrado." | "Lembrete -- não encontrado. | Passou | [T17.mp4](videos/T17.mp4) |
 | T18 | — | `rememberme edit 1` | Erro: "indique pelo menos uma alteracao: --texto, --as, --entre, --a-cada ou --dias" |  Invalid value: indique pelo menos uma alteracao: --texto, --as, --entre, --a-cada ou --dias | Passou | [T18.mp4](videos/T18.mp4) |
-| T19 | Lembrete existente, ativo | `rememberme off <id>` | "Lembrete <id> desativado."; `list` mostra `Ativo = nao` | | | |
+| T19 | Lembrete existente, ativo | `rememberme off 1` | "Lembrete 1 desativado."; `list` mostra `Ativo = nao` | Lembrete desativado com sucesso e confirmado estado inativo na listagem | Passou | [T19.mp4](videos/T19.mp4) |
 | T20 | Lembrete desativado (T19) | `rememberme on <id>` | "Lembrete <id> ativado."; `list` mostra `Ativo = sim` | | | |
 | T21 | Lembrete existente | `rememberme remove <id>` | "Lembrete <id> removido."; deixa de aparecer em `list` | | | |
 | T22 | — | `rememberme remove 999` (ID inexistente) | "Lembrete 999 nao existe." | | | |
