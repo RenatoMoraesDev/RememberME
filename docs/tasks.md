@@ -23,10 +23,10 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 |---|---|---|---|---|
 | Organização inicial do repositório | Renato | pronto | 13/09/2026 | — |
 | Reorganizar a documentação por etapa | Renato | pronto | 03/09/2026 | — |
-| Plano de desenvolvimento (item 7) | Renato | em-desenvolvimento | 03/09/2026 | — |
+| Plano de desenvolvimento (item 7) | Renato |pronto  | 03/09/2026 | — |
 | Nomenclatura de branches no README | Renato |pronto | 03/09/2026 | — |
 
-| Criar o milestone M1 no GitHub | Renato | pendente | 03/09/2026 | plano |
+| Criar o milestone M1 no GitHub | Renato | pronto | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
 | Entrega da Etapa 2 | Todos | Pronto | 04/09/2026 | itens acima |
 
@@ -40,22 +40,22 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Estudo do `Typer`: comando que escreve na base de dados | Felipe | pronto | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
 | Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
-| Plano de comandos do CLI (casos de uso) | Renato | em-desenvolvimento | 07/09/2026 | — |
-| Validar o plano de comandos com o grupo | Todos | pendente | 09/09/2026 | plano de comandos |
+| Plano de comandos do CLI (casos de uso) | Renato | pronto | 23/09/2026 | — |
+| Validar o plano de comandos com o grupo | Todos | pronto | 23/09/2026 | plano de comandos |
 
 ## Fase 1 — Fundação e esqueleto
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Criar `.gitignore` | Renato | pendente | 07/09/2026 | — |
-| Criar `pyproject.toml` e fixar versões com `uv lock` | Renato | pendente | 07/09/2026 | escolha do agendador |
-| Renomear `src/remember/` para `src/rememberme/` | Renato | pendente | 07/09/2026 | — |
+| Criar `.gitignore` | Renato | pronto | 07/09/2026 | — |
+| Criar `pyproject.toml` e fixar versões com `uv lock` | Renato | pronto | 07/09/2026 | escolha do agendador |
+| Renomear `src/remember/` para `src/rememberme/` | Renato | pronto | 23/09/2026 | — |
 | Cada elemento instala o `uv`, corre `uv sync` e valida | Todos | pendente | 07/09/2026 | `pyproject.toml` |
-| Definir `models.py` | Renato | pendente | 08/09/2026 | — |
-| Validar `models.py` com o grupo e congelar | Todos | pendente | 09/09/2026 | `models.py` |
-| Esqueleto: sete módulos com assinaturas e docstrings | Renato | pendente | 09/09/2026 | `models.py` |
-| Ligar bandeja + agendador + notificação a correr | Renato | pendente | 09/09/2026 | esqueleto |
-| Ponto de integração 1 em `develop` | Todos | pendente | 09/09/2026 | tudo o acima |
+| Definir `models.py` | Renato | | Cada elemento instala o `uv`, corre `uv sync` e valida | Todos | pendente | 07/09/2026 | `pyproject.toml` | | 23/09/2026 | — |
+| Validar `models.py` com o grupo e congelar | Todos | pronto | 09/09/2026 | `models.py` |
+| Esqueleto: sete módulos com assinaturas e docstrings | Renato | pronto | 09/09/2026 | `models.py` |
+| Ligar bandeja + agendador + notificação a correr | Renato | pronto | 23/09/2026 | esqueleto |
+| Ponto de integração 1 em `develop` | Todos | pronto | 09/09/2026 | tudo o acima |
 
 ## Fase 2 — MVP
 
@@ -67,7 +67,7 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | `scheduler.py`: recorrência com janela (RF02) | Renato | pendente | 22/09/2026 | RF01 |
 | `tray.py`: menu e lembretes ativos (RF03) | Renato | pendente | 22/09/2026 | Fase 1 |
 | `cli.py`: comandos do MVP (RF06) | Felipe | pronto | 22/09/2026 | `storage.py`, plano de comandos |
-| `cli.py`: `start` e `stop` | Renato | pendente | 22/09/2026 | `app.py` |
+| `cli.py`: `start` e `stop` | Renato | pronto | 22/09/2026 | `app.py` |
 | `notifications.py`: afinação da notificação em Windows | Felipe | implementado e testado | 21/09/2026 | Fase 1 |
 | Ponto de integração 2 em `develop` — MVP fechado | Todos | pendente | 22/09/2026 | todos os módulos |
 
