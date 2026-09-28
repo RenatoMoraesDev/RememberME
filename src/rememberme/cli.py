@@ -279,6 +279,14 @@ def off(id: int):
     typer.echo(f"Lembrete {id} desativado.")
 
 
+@app.command()
+def gui():
+    """Abre a janela grafica simples (Tkinter) para gerir lembretes."""
+    from rememberme import gui as gui_modulo
+
+    gui_modulo.arrancar()
+
+
 # o programa residente   [Renato]
 
 

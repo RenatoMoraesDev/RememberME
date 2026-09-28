@@ -8,6 +8,10 @@
 
 from typing import Callable
 
+import os
+import subprocess
+import sys
+
 import pystray
 from PIL import Image, ImageDraw
 from pystray import Menu, MenuItem
@@ -23,6 +27,36 @@ def _criar_icone():
     d.line([32, 34, 44, 40], fill="white", width=5)
     return img
 
+def _abrir_gui(icon=None, item=None) -> None:
+    """Abre a GUI num processo a parte, para nao bloquear o icone da bandeja."""
+    #: no exe empacotado, sys.executable e' o proprio RememberME.exe, que nao
+    #: entende "-m"; usa-se "--gui" (ver o if __name__ em app.py).
+    if getattr(sys, "frozen", False):
+        comando = [sys.executable, "--gui"]
+    else:
+        comando = [sys.executable, "-m", "rememberme", "gui"]
+
+    if sys.platform == "win32":
+        subprocess.Popen(
+            comando,
+            creationflags=subprocess.CREATE_NO_WINDOW,
+            #: ver o comentario igual em app._arrancar_windows().
+            env={**os.environ, "PYINSTALLER_RESET_ENVIRONMENT": "1"},
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            close_fds=True,
+        )
+    else:
+        subprocess.Popen(
+            comando,
+            start_new_session=True,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            close_fds=True,
+        )
+
 def arrancar(ao_sair: Callable[[], None]) -> None:
     """Mostra o icone e BLOQUEIA até o programa encerrar.
 
@@ -34,7 +68,11 @@ def arrancar(ao_sair: Callable[[], None]) -> None:
         icon.stop()
         ao_sair()
 
-    menu = Menu(MenuItem("Sair", _sair))
+    #: `default=True` faz o clique simples no icone abrir a GUI (Windows).
+    menu = Menu(
+        MenuItem("Abrir", _abrir_gui, default=True),
+        MenuItem("Sair", _sair),
+    )
     _icone = pystray.Icon("rememberme", _criar_icone(), "RememberME", menu)
     _icone.run()
 

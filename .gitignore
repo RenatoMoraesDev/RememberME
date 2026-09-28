@@ -49,3 +49,5 @@ desktop.ini
 *.log
 .env
 .claude/
+
+/RememberME.exe
