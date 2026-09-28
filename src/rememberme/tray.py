@@ -8,6 +8,7 @@
 
 from typing import Callable
 
+import os
 import subprocess
 import sys
 
@@ -39,6 +40,8 @@ def _abrir_gui(icon=None, item=None) -> None:
         subprocess.Popen(
             comando,
             creationflags=subprocess.CREATE_NO_WINDOW,
+            #: ver o comentario igual em app._arrancar_windows().
+            env={**os.environ, "PYINSTALLER_RESET_ENVIRONMENT": "1"},
             stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

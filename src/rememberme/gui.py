@@ -37,6 +37,18 @@ class JanelaPrincipal(tk.Tk):
         self._construir_lista()
         self.atualizar_lista()
 
+        #: limpa um pedido antigo e passa a vigiar o "Sair" do tray
+        storage.guardar_estado(aplicacao.FECHAR_GUI, "0")
+        self.after(2000, self._vigiar_saida)
+
+    def _vigiar_saida(self):
+        """Fecha a janela se o "Sair" do tray o pediu (ver app.sair_tudo)."""
+        if storage.ler_estado(aplicacao.FECHAR_GUI) == "1":
+            storage.guardar_estado(aplicacao.FECHAR_GUI, "0")
+            self.destroy()
+            return
+        self.after(2000, self._vigiar_saida)
+
     # formulario para criar lembretes
 
     def _construir_formulario(self):
