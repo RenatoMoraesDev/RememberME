@@ -211,7 +211,9 @@ class JanelaPrincipal(tk.Tk):
         self.campo_janela_fim.insert(0, lembrete.janela_fim or "")
         self.campo_intervalo.delete(0, "end")
         self.campo_intervalo.insert(0, str(lembrete.intervalo_min or ""))
-        self.campo_accao.current(1 if lembrete.accao == "popup" else 0)
+        #: o combobox so' tem a opcao "Popup" (indice 0); pedir o indice 1
+        #: dava erro e o Editar falhava em todos os lembretes criados na GUI.
+        self.campo_accao.current(0)
 
         self.id_em_edicao = id_
         self.botao_guardar.config(text=f"Guardar edicao (ID {id_})")
