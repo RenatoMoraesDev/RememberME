@@ -3,22 +3,21 @@
 > Atividade do ciclo de vida: **verificação e validação**. A implementação
 > foi feita na Etapa 3; aqui verifica-se se funciona e demonstra-se.
 
-**Entrega:** a definir
+**Entrega:** 28/09/2026
 
 O enunciado pede três itens no entregável. Onde está cada um:
 
-| # | Item exigido | Onde está |
-|:---:|---|---|
-| 1 | Plano de testes inicial (com resultado dos testes) | [`plano-testes.md`](plano-testes.md) — RF01, RF02, RF03, RF04, RF06 |
-| 2 | Vídeos demonstrativos | [`videos/`](videos/) — por gravar, ver nota abaixo |
-| 3 | Documentação prévia (funcionalidades, instalação, execução, limitações, melhorias) | [`documentacao.md`](documentacao.md) |
+| #   | Item exigido                                                                       | Onde está                                                           |
+|:---:| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 1   | Plano de testes inicial (com resultado dos testes)                                 | [`plano-testes.md`](plano-testes.md) — RF01, RF02, RF03, RF04, RF06 |
+| 2   | Vídeos demonstrativos                                                              | [`videos/`](videos/) — por gravar, ver nota abaixo                  |
+| 3   | Documentação prévia (funcionalidades, instalação, execução, limitações, melhorias) | [`documentacao.md`](documentacao.md)                                |
 
 ## Nota sobre o âmbito do plano de testes
 
 O plano cobre os requisitos do MVP que estão implementados e utilizáveis via
 CLI: RF01, RF02, RF03 (parcial), RF04 e RF06. RF05, RF07, RF08, RF09 e RF10
-não entram — motivo em
-[`documentacao.md`](documentacao.md#funcionalidades-não-implementadas).
+não entram — motivo em [`documentacao.md`](documentacao.md#funcionalidades-não-implementadas).
 
 ## Nota sobre "resultado obtido" e vídeos
 

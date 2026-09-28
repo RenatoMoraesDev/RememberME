@@ -12,7 +12,3 @@ Item 2 do entregável da Etapa 4: um vídeo por teste do
 `<ID-do-teste>.mp4` — por exemplo `T01.mp4`, `T05.mp4`, `T19.mp4`, um por
 linha da tabela em `plano-testes.md`. A coluna **Vídeo** de cada teste liga
 para o ficheiro correspondente aqui.
-
-Se os vídeos ficarem grandes para o repositório, alternativa: subir a um
-serviço de vídeo (ex. GitHub, Drive, YouTube não-listado) e colocar o link
-na coluna **Vídeo**, em vez do ficheiro em si.
