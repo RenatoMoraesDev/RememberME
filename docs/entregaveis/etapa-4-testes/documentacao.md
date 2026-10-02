@@ -115,6 +115,11 @@ rememberme stop            # pede o encerramento
   prever essa opção.
 - RF07 (ações por lembrete) não é configurável via CLI — ver acima.
 - RF05 não implementado.
+- Intervalos de recorrência acima de 60 minutos não são suportados: o lembrete
+  fica guardado mas não dispara. Intervalos que não dividem a hora (45 minutos)
+  dão disparos irregulares.
+- A janela de horário só considera a hora inteira (`08:30-14:00` começa às 08:00
+  e inclui a hora das 14:00) e não pode atravessar a meia-noite.
 - O executável só existe para Windows 64 bits.
 - O portátil e a versão instalada, no mesmo computador, partilham os
   mesmos lembretes.
