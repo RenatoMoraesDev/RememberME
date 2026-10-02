@@ -12,13 +12,49 @@ Projeto final do curso IEFP — Programação, Nível 5 (formador: CID).
 
 ## Status
 
-Etapa 1 concluída. Etapa 2 concluída — stack e arquitetura decididas ([`plano-desenvolvimento.md`](docs/entregaveis/etapa-2-projeto/plano-desenvolvimento.md)).
+**Versão 1.0** — as cinco etapas do curso estão concluídas. O código está congelado
+nesta versão; a entrega final reúne o [relatório](docs/entregaveis/etapa-5-entrega/RelatorioFinal-UC00615.pdf)
+e o [vídeo demonstrativo](docs/entregaveis/etapa-5-entrega/video-demonstrativo/RememberME.mp4).
 
-## Como começar
+O que a aplicação faz, hoje:
+
+- cria lembretes com **hora fixa** ou **recorrência dentro de uma janela de horário**;
+- notifica no ecrã, com a ação escolhida por lembrete (pop-up, som, abrir aplicação ou endereço);
+- corre em segundo plano, com ícone na **bandeja do sistema**, e pode arrancar com o Windows;
+- é usada pela **linha de comandos** (`rememberme add`, `list`, `edit`, `remove`, …) ou pela **janela gráfica** (`rememberme gui`).
+
+## Instalar (Windows)
+
+A forma mais simples, sem instalar Python nem mais nada. Na
+[página da versão 1.0](https://github.com/RenatoMoraesDev/RememberME/releases/tag/v1.0)
+há dois ficheiros:
+
+| Ficheiro | Para quê |
+|---|---|
+| `RememberME-Setup-v1.0.exe` | Instalador: acrescenta a aplicação ao menu Iniciar e permite arrancar com o Windows |
+| `RememberME-Portable-v1.0.exe` | Executável único, sem instalação: corre onde estiver |
+
+O Windows pode avisar que o editor é desconhecido, porque o executável não está
+assinado. Escolher **Mais informações → Executar mesmo assim**.
+
+### Limitações conhecidas
+
+- Só existe para Windows 64 bits.
+- Os intervalos de recorrência acima de 60 minutos não são suportados: o lembrete
+  fica guardado mas não dispara. Os intervalos que não dividem a hora (45 minutos,
+  por exemplo) dão disparos irregulares.
+- A janela de horário só considera a hora inteira: `08:30-14:00` começa às 08:00 e
+  inclui a hora das 14:00. Janelas que atravessam a meia-noite não funcionam.
+- O menu da bandeja não mostra os lembretes ativos.
+- Os lembretes pré-carregados (RF05) não estão implementados.
+
+A lista completa, com as melhorias previstas, está em
+[`documentacao.md`](docs/entregaveis/etapa-4-testes/documentacao.md#limitações-conhecidas).
+
+## Desenvolver
 
 O projeto usa o [**uv**](https://docs.astral.sh/uv/) para gerir o ambiente e as
-dependências. Enquanto não houver uma versão empacotada, é assim que se instala e
-se corre o RememberME — tanto para desenvolver como para simplesmente usar.
+dependências. É assim que se corre o código-fonte, para desenvolver ou para experimentar.
 
 ### 1. Instalar o uv
 
@@ -37,7 +73,7 @@ uv --version
 ### 2. Obter o projeto
 
 ```bash
-git clone https://github.com/<utilizador>/RememberME.git
+git clone https://github.com/RenatoMoraesDev/RememberME.git
 ```
 
 ```bash
@@ -81,6 +117,12 @@ uv run rememberme start
 uv run rememberme stop
 ```
 
+Ou, em alternativa, abrir a janela gráfica:
+
+```bash
+uv run rememberme gui
+```
+
 > O `start` fica a correr até ao `stop` ou até se escolher **Sair** no menu da
 > bandeja. Não o mates à força: em Windows o ícone fica lá a fingir que o programa
 > está vivo.
@@ -92,13 +134,17 @@ uv run rememberme stop
 | [Entregáveis por etapa](docs/entregaveis/) | Material submetido a avaliação |
 | [Análise de requisitos](docs/entregaveis/etapa-1-analise/01-analise-requisitos.md) | Etapa 1 |
 | [Plano de desenvolvimento](docs/entregaveis/etapa-2-projeto/plano-desenvolvimento.md) | Etapa 2 |
+| [Plano e resultados dos testes](docs/entregaveis/etapa-4-testes/plano-testes.md) | Etapa 4 — 22 testes, 22 aprovados |
+| [Relatório final](docs/entregaveis/etapa-5-entrega/RelatorioFinal-UC00615.pdf) | Etapa 5 |
+| [Vídeo demonstrativo](docs/entregaveis/etapa-5-entrega/video-demonstrativo/RememberME.mp4) | Etapa 5 |
 | [Quadro de tarefas](docs/tasks.md) | Estado atual do trabalho |
 | [Decisões técnicas](docs/decisoes.md) | O que se decidiu e porquê |
 | [Enunciados](docs/enunciados/) | Documentos do formador |
 
 ## Stack
 
-Decidida na Etapa 2. As versões estão fixadas no `pyproject.toml`, para que os três instalem exatamente o mesmo.
+Decidida na Etapa 2 e ajustada na Etapa 4 (interface gráfica e instalador). As versões
+das dependências estão fixadas no `uv.lock`, para que os três instalem exatamente o mesmo.
 
 | Área | Tecnologia |
 |---|---|
@@ -108,8 +154,9 @@ Decidida na Etapa 2. As versões estão fixadas no `pyproject.toml`, para que os
 | Notificações | plyer |
 | Agendamento e recorrência | APScheduler |
 | Base de dados | SQLite3 |
-| Empacotamento | PyInstaller |
-| Interface gráfica | PySide6 — **condicional ao RF10**, que é incremental |
+| Empacotamento | PyInstaller (`--onefile`) |
+| Instalador | Inno Setup |
+| Interface gráfica | Tkinter (prevista em PySide6; ver [D11](docs/decisoes.md#d11--interface-gráfica-em-tkinter-em-vez-de-pyside6)) |
 
 Justificação de cada escolha em [`stack.md`](docs/entregaveis/etapa-2-projeto/stack.md),
 e o registo das decisões com o respetivo motivo em [`decisoes.md`](docs/decisoes.md).
@@ -142,8 +189,11 @@ Merge direto em `develop`, nos pontos de integração agendados. `develop` → `
 
 ## Contribuidores
 
+Alguns commits aparecem no GitHub sob mais do que uma conta, por terem sido feitos
+de máquinas com configurações diferentes.
+
 | Nome | GitHub |
-|---|---|---|
+|---|---|
 | Felipe Ribeiro | [@felipe-g-ribeiro](https://github.com/felipe-g-ribeiro) |
-| Niley Barros | [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) |
-| Renato Moraes | [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) |
+| Niley Barros | [@nileysacramento](https://github.com/nileysacramento) e [@sacramentoniley-hub](https://github.com/sacramentoniley-hub) |
+| Renato Moraes | [@hexemeister](https://github.com/hexemeister) e [@RenatoMoraesDev](https://github.com/RenatoMoraesDev) |

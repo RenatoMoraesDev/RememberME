@@ -177,3 +177,66 @@ As duas coisas dizem coisas diferentes — o `pyproject` diz *"funciona a partir
 de"*, o lock diz *"é isto que estamos os três a usar"*. Atualizar é
 `uv lock --upgrade`, e o lock alterado entra num commit.
 
+## D10 — Pull Requests também de feature para `develop`
+
+**Data:** 24/09/2026 · **Estado:** aplicado · **Revê a [D8](#d8--pull-request-apenas-de-develop-para-master)**
+
+A D8 previa merge direto das branches de cada um em `develop`. Na prática, a partir
+da Etapa 3, parte do trabalho entrou por Pull Request ([#2](https://github.com/RenatoMoraesDev/RememberME/pull/2),
+[#3](https://github.com/RenatoMoraesDev/RememberME/pull/3),
+[#5](https://github.com/RenatoMoraesDev/RememberME/pull/5) e
+[#7](https://github.com/RenatoMoraesDev/RememberME/pull/7)), o que deixa o
+trabalho de cada pessoa visível na plataforma.
+
+O resto da D8 mantém-se: `develop` → `master` só por Pull Request, um por entrega.
+Continua sem haver revisão registada no GitHub; as revisões foram feitas em grupo,
+nas aulas.
+
+## D11 — Interface gráfica em Tkinter em vez de PySide6
+
+**Data:** 24/09/2026 · **Estado:** aplicado · **Revê a escolha da Etapa 2**
+
+O [`stack.md`](entregaveis/etapa-2-projeto/stack.md) previa PySide6 para o RF10. A
+janela gráfica foi feita em Tkinter, que vem com o Python: não acrescenta uma
+dependência ao `pyproject.toml` nem peso ao executável de ficheiro único (D12).
+
+**Custo aceite:** aspeto mais simples do que o de uma interface em Qt, e menos
+componentes prontos. Para o âmbito do RF10 — criar, editar e remover lembretes — chegou.
+
+## D12 — Executável único com PyInstaller e instalador com Inno Setup
+
+**Data:** 28/09/2026 · **Estado:** aplicado
+
+A aplicação distribui-se de duas formas, geradas de uma vez pelo `build.ps1`: um
+executável portátil (`--onefile`, sem pasta de ficheiros ao lado) e um instalador
+feito com Inno Setup, que acrescenta o menu Iniciar e a opção de arrancar com o
+Windows. Quem usa não precisa de Python nem de `uv`.
+
+**Custo aceite:** o executável de ficheiro único extrai-se para `%TEMP%` e arranca
+mais devagar, e alguns antivírus desconfiam dele. O primeiro executável de 19 MB
+foi parar ao histórico por engano (commit `14d65ae`) e ficou lá; está fora do
+rastreio desde então (`/RememberME.exe` no `.gitignore`).
+
+## D13 — `RememberME.spec` versionado
+
+**Data:** 28/09/2026 · **Estado:** aplicado
+
+O `RememberME.spec` está no repositório. O `.gitignore` ignorava `*.spec`, com
+a nota de que a linha devia sair assim que o ficheiro fosse editado à mão — e foi:
+leva `hiddenimports=['plyer.platforms.win.notification']`, sem o qual o `plyer` não
+encontra o backend de notificações no executável empacotado (risco R11). Sem o
+`.spec` versionado, quem gerasse o executável noutra máquina obtinha um programa
+que arranca mas não notifica.
+
+## D14 — Vídeos dos testes dentro do repositório
+
+**Data:** 28/09/2026 · **Estado:** aplicado
+
+Os 22 vídeos do plano de testes (`T01`–`T22`, em `.mp4`) ficam em
+[`etapa-4-testes/videos/`](entregaveis/etapa-4-testes/videos/), ao lado do
+`plano-testes.md` que os referencia, e não numa plataforma externa. O enunciado
+exige um vídeo por teste; ligações para fora do repositório podem deixar de
+funcionar, e um repositório autocontido é verificável por quem o avalia.
+
+**Custo:** o repositório fica mais pesado, e cada vídeo regravado acrescenta ao histórico.
+
