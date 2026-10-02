@@ -3,7 +3,7 @@
 Item 6 do entregável da Etapa 2. Atualizado a cada tarefa concluída — o estado numa
 data passada recupera-se pela etiqueta Git da entrega correspondente.
 
-**Estados:** `pendente` · `em-desenvolvimento` · `pronto`
+**Estados:** `pendente` · `em-desenvolvimento` · `parcial` · `pronto` · `não feito`
 
 ## Calendário
 
@@ -23,20 +23,18 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 |---|---|---|---|---|
 | Organização inicial do repositório | Renato | pronto | 13/09/2026 | — |
 | Reorganizar a documentação por etapa | Renato | pronto | 03/09/2026 | — |
-| Plano de desenvolvimento (item 7) | Renato |pronto  | 03/09/2026 | — |
-| Nomenclatura de branches no README | Renato |pronto | 03/09/2026 | — |
-
+| Plano de desenvolvimento (item 7) | Renato | pronto | 03/09/2026 | — |
+| Nomenclatura de branches no README | Renato | pronto | 03/09/2026 | — |
 | Criar o milestone M1 no GitHub | Renato | pronto | 03/09/2026 | plano |
 | Fechar a escolha do motor de agendamento | Renato | pronto | 04/09/2026 | comparação técnica |
-| Entrega da Etapa 2 | Todos | Pronto | 04/09/2026 | itens acima |
+| Entrega da Etapa 2 | Todos | pronto | 04/09/2026 | itens acima |
 
 ## Fase 0 — Capacitação
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | Pronto | 07/09/2026 | contrato da função |
-| Estudo do `pystray`: ícone com menu "Sair" | Renato |Pronto | 07/09/2026 | — |
-
+| Estudo do `plyer` + entregar `notificar(titulo, mensagem)` | Niley | pronto | 07/09/2026 | contrato da função |
+| Estudo do `pystray`: ícone com menu "Sair" | Renato | pronto | 07/09/2026 | — |
 | Estudo do `Typer`: comando que escreve na base de dados | Felipe | pronto | 07/09/2026 | — |
 | Comparação `schedule` vs APScheduler com janela de horário | Renato | pronto | 04/09/2026 | — |
 | Reunião: validar a escolha do agendador | Todos | pronto | 04/09/2026 | comparação e spikes |
@@ -50,8 +48,8 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 | Criar `.gitignore` | Renato | pronto | 07/09/2026 | — |
 | Criar `pyproject.toml` e fixar versões com `uv lock` | Renato | pronto | 07/09/2026 | escolha do agendador |
 | Renomear `src/remember/` para `src/rememberme/` | Renato | pronto | 23/09/2026 | — |
-| Cada elemento instala o `uv`, corre `uv sync` e valida | Todos | pendente | 07/09/2026 | `pyproject.toml` |
-| Definir `models.py` | Renato | | Cada elemento instala o `uv`, corre `uv sync` e valida | Todos | pendente | 07/09/2026 | `pyproject.toml` | | 23/09/2026 | — |
+| Cada elemento instala o `uv`, corre `uv sync` e valida | Todos | pronto | 07/09/2026 | `pyproject.toml` |
+| Definir `models.py` | Renato | pronto | 23/09/2026 | — |
 | Validar `models.py` com o grupo e congelar | Todos | pronto | 09/09/2026 | `models.py` |
 | Esqueleto: sete módulos com assinaturas e docstrings | Renato | pronto | 09/09/2026 | `models.py` |
 | Ligar bandeja + agendador + notificação a correr | Renato | pronto | 23/09/2026 | esqueleto |
@@ -61,32 +59,45 @@ ainda não são conhecidas; a Fase 3 fecha dentro de setembro para não depender
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| `storage.py`: schema, CRUD e tabela `estado` (RF04) | Renato | pendente | 14/09/2026 | Fase 1 |
-| `storage.py`: lembretes pré-carregados (RF05) | Renato | pendente | 14/09/2026 | CRUD |
-| `scheduler.py`: hora fixa (RF01) | Renato | pendente | 14/09/2026 | Fase 1 |
-| `scheduler.py`: recorrência com janela (RF02) | Renato | pendente | 22/09/2026 | RF01 |
-| `tray.py`: menu e lembretes ativos (RF03) | Renato | pendente | 22/09/2026 | Fase 1 |
+| `storage.py`: schema, CRUD e tabela `estado` (RF04) | Renato | pronto | 14/09/2026 | Fase 1 |
+| `storage.py`: lembretes pré-carregados (RF05) | Renato | não feito | 14/09/2026 | CRUD |
+| `scheduler.py`: hora fixa (RF01) | Renato | pronto | 14/09/2026 | Fase 1 |
+| `scheduler.py`: recorrência com janela (RF02) | Renato | parcial | 22/09/2026 | RF01 |
+| `tray.py`: menu e lembretes ativos (RF03) | Renato | parcial | 22/09/2026 | Fase 1 |
 | `cli.py`: comandos do MVP (RF06) | Felipe | pronto | 22/09/2026 | `storage.py`, plano de comandos |
 | `cli.py`: `start` e `stop` | Renato | pronto | 22/09/2026 | `app.py` |
-| `notifications.py`: afinação da notificação em Windows | Felipe | implementado e testado | 21/09/2026 | Fase 1 |
-| Ponto de integração 2 em `develop` — MVP fechado | Todos | pendente | 22/09/2026 | todos os módulos |
+| `notifications.py`: afinação da notificação em Windows | Felipe | pronto | 21/09/2026 | Fase 1 |
+| Ponto de integração 2 em `develop` — MVP fechado | Todos | pronto | 22/09/2026 | todos os módulos |
 
 ## Fase 3 — Validação e incrementais
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Testes de `storage.py` e `scheduler.py` | Renato | pendente | 24/09/2026 | MVP estável |
+| Testes automatizados de `storage.py` e `scheduler.py` | Renato | não feito | 24/09/2026 | MVP estável |
 | Testes de `cli.py` | Felipe | pronto | 24/09/2026 | MVP estável |
-| Testes de `notifications.py` | Niley | pendente | 24/09/2026 | MVP estável |
-| Empacotamento com PyInstaller | Felipe | pendente | 24/09/2026 | MVP estável |
-| RF07: som, pop-up, abrir aplicação/URL | Niley | pendente | 28/09/2026 | MVP estável |
-| RF08: arranque com o sistema operativo | Felipe | pendente | 28/09/2026 | MVP estável |
+| Testes automatizados de `notifications.py` | Niley | não feito | 24/09/2026 | MVP estável |
+| Empacotamento com PyInstaller | Felipe | pronto | 24/09/2026 | MVP estável |
+| RF07: som, pop-up, abrir aplicação/URL | Niley | parcial | 28/09/2026 | MVP estável |
+| RF08: arranque com o sistema operativo | Felipe | pronto | 28/09/2026 | MVP estável |
 
 ## Documentação e apresentação
 
 | Descrição | Responsável | Estado | Data prevista | Dependências |
 |---|---|---|---|---|
-| Registo de decisões técnicas (`decisoes.md`) | Niley | pendente | contínuo | — |
-| README de utilização | Felipe | pendente | 28/09/2026 | MVP estável |
-| Guião da demonstração | Felipe | pendente | 30/09/2026 | executável |
+| Registo de decisões técnicas (`decisoes.md`) | Niley | contínuo | contínuo | — |
+| README de utilização | Felipe | pronto | 28/09/2026 | MVP estável |
+| Guião da demonstração | Felipe | pronto | 30/09/2026 | executável |
 | Documentação das etapas | Renato | contínuo | por etapa | — |
+
+## Etapas 3 a 5 — Entregas
+
+| Descrição | Responsável | Estado | Data prevista | Dependências |
+|---|---|---|---|---|
+| Entrega da Etapa 3 — protótipo funcional (`v0.5`) | Todos | pronto | 22/09/2026 | Fases 1 e 2 |
+| Interface gráfica em Tkinter (RF10) | Felipe | pronto | 24/09/2026 | MVP estável |
+| Executável portátil e instalador (`build.ps1`, Inno Setup) | Renato | pronto | 28/09/2026 | empacotamento |
+| Plano de testes, vídeos e documentação (Etapa 4) | Todos | pronto | 28/09/2026 | executável |
+| Entrega da Etapa 4 | Todos | pronto | 28/09/2026 | itens acima |
+| Relatório final (Etapa 5) | Todos | pronto | 02/10/2026 | Etapa 4 |
+| Vídeo demonstrativo (Etapa 5) | Todos | pronto | 02/10/2026 | executável |
+| Entrega da Etapa 5 — versão final (`v1.0`) | Todos | pronto | 02/10/2026 | itens acima |
