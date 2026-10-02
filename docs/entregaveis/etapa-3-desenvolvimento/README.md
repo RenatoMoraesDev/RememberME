@@ -3,7 +3,7 @@
 > Atividade do ciclo de vida: **implementação**. O planeamento está na Etapa 2;
 > a validação formal começa na Etapa 4.
 
-**Entrega:** a definir (versão intermédia, não a entrega final)
+**Entrega:** 22/09/2026 (versão intermédia, etiqueta `etapa-3` e release [`v0.5`](https://github.com/RenatoMoraesDev/RememberME/releases/tag/v0.5))
 
 O enunciado lista sete itens no entregável. Onde está cada um:
 
@@ -11,7 +11,7 @@ O enunciado lista sete itens no entregável. Onde está cada um:
 |:---:|---|---|
 | 1 | Estrutura de código organizada | [`src/rememberme/`](../../../src/rememberme/) — 7 módulos conforme [`plano-desenvolvimento.md`](../etapa-2-projeto/plano-desenvolvimento.md) |
 | 2 | Funcionalidades principais parcial/totalmente implementadas | [`docs/tasks.md`](../../tasks.md) — RF01–RF08, estado por linha |
-| 3 | Histórico de commits envolvendo os três elementos | `git shortlog -sn` — Renato Moraes (36), Felipe Ribeiro (21), Niley (10) |
+| 3 | Histórico de commits envolvendo os três elementos | `git shortlog -sn` — Renato Moraes (37), Felipe Ribeiro (21), Niley (10), mais 1 commit de Renato sob a conta `RenatoMoraesDev` — contagem na etiqueta `etapa-3` |
 | 4 | Utilização de branches | README §"Organização do trabalho" — convenção `<tipo>/<nome>-<descrição>` |
 | 5 | Pull Requests | [#2](https://github.com/RenatoMoraesDev/RememberME/pull/2), [#3](https://github.com/RenatoMoraesDev/RememberME/pull/3), [#5](https://github.com/RenatoMoraesDev/RememberME/pull/5), [#7](https://github.com/RenatoMoraesDev/RememberME/pull/7) (feature → develop) e [#8](https://github.com/RenatoMoraesDev/RememberME/pull/8) (develop → master) |
 | 6 | Revisões de código | ⚠️ ver nota abaixo |
@@ -34,5 +34,5 @@ esquecimento.
 
 O enunciado sugere etiquetar esta entrega como `v0.5 — Protótipo funcional`,
 reservando `v1.0 — Versão final` para a Etapa 5. A tag `v1.0_Final`, criada
-junto do PR #8, antecipou esse nome antes da hora — sugestão: substituir por
-`v0.5` antes da entrega desta etapa.
+junto do PR #8, antecipou esse nome antes da hora e foi substituída por `v0.5`.
+A versão final, `v1.0`, é a da [Etapa 5](../etapa-5-entrega/).
